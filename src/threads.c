@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/13 11:21:45 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/13 13:03:30 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	*watch_philos(void *args)
 
 	philo = (t_philosopher_data*)args;
 	params = philo->params;
+	
 	while (1)
 	{
 		if (g_philo_eat_goal == params[NB_PHILOSOPHERS])
@@ -145,6 +146,6 @@ int	start(t_philosopher_data *philosophers, int *params)
 	}
 	if (pthread_create(&watcher, NULL, watch_philos, (void*)philosophers))
 		return (BAD_CREATE);
-	while (g_terminate == 0){};
+	while (g_terminate == 0){usleep(1000)};
 	return (0);
 }
