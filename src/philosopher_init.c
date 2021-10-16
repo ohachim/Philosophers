@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/12 18:22:54 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/16 17:35:32 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,19 @@ int	make_forks(int *params, t_fork **forks)
 	return (0);
 }
 
-t_philosopher_data	*make_philosophers(int *params, t_fork *forks, struct timeval start_of_program)
+t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start_of_program)
 {
-	t_philosopher_data	*philosophers;
-	pthread_mutex_t		*print_mutex = NULL;
+	t_philo_data		*philosophers;
+	pthread_mutex_t		*print_mutex;
 	int					i;
+	t_philo_data		*queue;
 
 	i = 0;
-	philosophers = (t_philosopher_data*)malloc(sizeof(t_philosopher_data)
+	queue = create_queue(params[NB_PHILOSOPHERS]);
+	philosophers = (t_philo_data*)malloc(sizeof(t_philo_data)
 											* params[NB_PHILOSOPHERS]);
 	print_mutex = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(print_mutex, NULL) || !philosophers)
+	if (pthread_mutex_init(print_mutex, NULL) || !philosophers || !queue)
 		return (NULL);
 	while (i < params[NB_PHILOSOPHERS])
 	{
@@ -70,6 +72,12 @@ t_philosopher_data	*make_philosophers(int *params, t_fork *forks, struct timeval
 		philosophers[i].params = params;
 		philosophers[i].print_mutex = print_mutex;
 		philosophers[i].start_of_program = start_of_program;
+		philosophers[i].should_eat = 0;
+		philosophers[i].queue = queue;
+		if (i % 2)
+			philosophers[i].hand = 'r';
+		else
+			philosophers[i].hand = 'l';
 		if (pthread_mutex_init(&philosophers[i].death_mutex, NULL))
 			return (NULL);
 		if (i == params[NB_PHILOSOPHERS] - 1) // If this is the last philosopher, his right fork should be the 0th fork

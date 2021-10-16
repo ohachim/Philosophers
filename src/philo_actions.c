@@ -6,13 +6,13 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:17:38 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/13 12:38:25 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/16 16:51:37 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
-void	mutex_print(char *action, t_philosopher_data *philo)
+void	mutex_print(char *action, t_philo_data *philo)
 {
 		pthread_mutex_lock(philo->print_mutex);
 
@@ -21,7 +21,7 @@ void	mutex_print(char *action, t_philosopher_data *philo)
 		pthread_mutex_unlock(philo->print_mutex);
 }
 
-void	philo_eat(t_philosopher_data *philo)
+void	philo_eat(t_philo_data *philo)
 {
 	pthread_mutex_lock(&philo->death_mutex);
 	mutex_print("is eating", philo);
@@ -36,13 +36,13 @@ void	philo_eat(t_philosopher_data *philo)
 	pthread_mutex_unlock(&philo->death_mutex);
 }
 
-void	philo_sleep(t_philosopher_data *philo)
+void	philo_sleep(t_philo_data *philo)
 {
 	mutex_print("is sleeping", philo);
 	usleep(philo->params[TIME_TO_SLEEP]);
 }
 
-void	philo_think(t_philosopher_data *philo)
+void	philo_think(t_philo_data *philo)
 {
 	mutex_print("is thinking", philo);
 }

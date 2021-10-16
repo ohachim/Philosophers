@@ -6,7 +6,7 @@
 #    By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 12:47:22 by ohachim           #+#    #+#              #
-#    Updated: 2021/10/12 17:40:12 by ohachim          ###   ########.fr        #
+#    Updated: 2021/10/16 17:35:49 by ohachim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 
 SRC_PATH = src
 
-SRC_NAME = error.c main.c my_atoi.c my_strdup.c my_strlen.c philo_actions.c philosopher_init.c threads.c
+SRC_NAME = error.c main.c my_atoi.c my_strdup.c my_strlen.c philo_actions.c philosopher_init.c threads.c philo_queue.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 

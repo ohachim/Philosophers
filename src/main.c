@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/12 18:04:32 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/16 16:51:37 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 int	main(int argc, char **argv)
 {
 	int					*params;
-	struct timeval		start_of_program;
 	t_fork				*forks;
-	t_philosopher_data	*philosophers;
+	t_philo_data	*philosophers;
+	struct timeval		start_of_program;
 	int					errno;
 
-	gettimeofday(&start_of_program, NULL);
 	g_philo_eat_goal = 0;
 	errno = 0;
+	gettimeofday(&start_of_program, NULL);
 	if (argc != 5 && argc != 6)
 		return (error(BAD_PARAMETERS));
 	params = (int*)malloc(sizeof(int) * argc - 1);
@@ -51,7 +51,13 @@ int	main(int argc, char **argv)
 	if (errno)
 		return (error(errno));
 	return (EXIT_SUCCESS);
-	//TODO: gotta destroy the mutexes(forks);
+	/*TODO: destroy *forks
+	* free forks
+	* destroy *print_mutex
+	* free print_mutex
+	* destroy death mutex
+	* free philosophers
+	*/
 }
 //0x7fde11402c38 0x7fde11402c80
 //0x7fde11402c80 0x7fde11402cc8
