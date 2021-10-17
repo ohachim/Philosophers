@@ -127,8 +127,7 @@ void	*routine(void *args)
 		return (NULL);
 	while (1)
 	{
-		while (!philo->should_eat)
-			usleep(100);
+		while (!philo->should_eat){usleep(500);};
 		mutex_print("wating for first fork", philo);
 		pthread_mutex_lock(first_fork);
 		mutex_print("has taken the first fork", philo);
@@ -139,14 +138,17 @@ void	*routine(void *args)
 		pthread_mutex_unlock(first_fork);
 		mutex_print("has dropped the first fork", philo);
 		pthread_mutex_unlock(second_fork);
-		mutex_print("has dropeed the second fork", philo);
 		philo_sleep(philo);
 		philo_think(philo);
+		pthread_mutex_lock(philo->enqueue_lock);
+		enqueue(philo->queue, philo);
+		philo->should_eat = 0;
+		pthread_mutex_unlock(philo->enqueue_lock);
+		mutex_print("has dropeed the second fork", philo);
 		// add it to rear of queue
 	}
 	return (NULL);
 }
-
 
 int	start(t_philo_data *philosophers, int *params)
 {

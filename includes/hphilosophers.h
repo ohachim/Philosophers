@@ -57,8 +57,10 @@ typedef struct				s_philo_data { // needs to be freed
 	t_fork					*left_fork;
 	t_fork					*right_fork;
 	int						*params;
-	pthread_mutex_t 		*print_mutex; // needs to be destroyed
+	pthread_mutex_t 		*print_mutex; // needs to be destroyed and freed
 	pthread_mutex_t 		death_mutex; // needs to be destroyed
+	pthread_mutex_t			*enqueue_lock;
+	pthread_mutex_t			*dequeue_lock;
 	struct s_philo_queue	*queue;
 }							t_philo_data;
 typedef struct 			s_philo_queue {
@@ -86,11 +88,11 @@ void				mutex_print(char *action, t_philo_data *philo);
 int					calculate_death(t_philo_data *philo);
 void				print_time_stamp( struct timeval start_of_program );
 t_philo_queue		*create_queue(int capacity);
-t_philo_data		*dequeue(t_philo_queue *queue);
+int					dequeue(t_philo_queue *queue);
+int					enqueue(t_philo_queue* queue, t_philo_data *philo);
 int					is_full(t_philo_queue *queue);
 int					is_empty(t_philo_queue *queue);
 t_philo_data		*front(t_philo_queue *queue);
 t_philo_data		*rear(t_philo_queue* queue);
-int					enqueue(t_philo_queue* queue, t_philo_data *philo);
 
 #endif

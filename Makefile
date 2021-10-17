@@ -26,7 +26,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 
 INC = includes
 
-# CFLAGS = -pthread -Wall -Wextra -Werror
+CFLAGS = -pthread #-Wall -Wextra -Werror
 CFLAGS =
 
 TARGET = philosopher

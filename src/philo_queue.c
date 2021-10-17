@@ -49,19 +49,24 @@ int				enqueue(t_philo_queue* queue, t_philo_data *philo)
 	queue->rear = (queue->rear + 1) % queue->capacity;
 	queue->philo_array[queue->rear] = philo;
 	queue->size += 1;
+	philo->should_eat = 0;
+	pthread_mutex_lock(philo->dequeue_lock); // not necessary
+	dequeue(queue);
+	pthread_mutex_unlock(philo->dequeue_lock);
 	return (1);
 }
 
-t_philo_data	*dequeue(t_philo_queue* queue)
+int		dequeue(t_philo_queue* queue)
 {
 	t_philo_data	*philo;
 
 	if (is_empty(queue))
-		return (NULL);
+		return (-1);
 	philo = queue->philo_array[queue->front];
 	queue->front = (queue->front + 1) % queue->capacity;
 	queue->size -= 1;
-	return philo; // Might removed, I only need to switch it's lights on
+	philo->should_eat = 1;
+	return (1); // Might removed, I only need to switch it's lights on
 }
 
 t_philo_queue	*create_queue(int capacity)
