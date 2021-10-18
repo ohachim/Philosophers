@@ -59,14 +59,15 @@ typedef struct				s_philo_data { // needs to be freed
 	int						*params;
 	pthread_mutex_t 		*print_mutex; // needs to be destroyed and freed
 	pthread_mutex_t 		death_mutex; // needs to be destroyed
-	pthread_mutex_t			*enqueue_lock;
-	pthread_mutex_t			*dequeue_lock;
+
 	struct s_philo_queue	*queue;
 }							t_philo_data;
 typedef struct 			s_philo_queue {
 	int 				size;
 	int 				front;
 	int 				rear;
+	pthread_mutex_t		*enqueue_lock;
+	pthread_mutex_t		*dequeue_lock;
 	unsigned int 		capacity;
 	t_philo_data		**philo_array; // hmmmm
 }						t_philo_queue;

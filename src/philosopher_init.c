@@ -54,8 +54,7 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 {
 	t_philo_data		*philosophers;
 	pthread_mutex_t		*print_mutex;
-	pthread_mutex_t		*enqueue;
-	pthread_mutex_t		*dequeue;
+
 	t_philo_queue		*queue;
 	int					i;
 
@@ -63,15 +62,13 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 	queue = create_queue(params[NB_PHILOSOPHERS]);
 	philosophers = (t_philo_data*)malloc(sizeof(t_philo_data)
 											* params[NB_PHILOSOPHERS]);
-	enqueue = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	dequeue = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+
 	print_mutex = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	if (!philosophers || !queue || !dequeue || !enqueue)
+	if (!philosophers || !queue)
 		return (NULL);
-	if (pthread_mutex_init(print_mutex, NULL)
-		|| pthread_mutex_init(enqueue, NULL)
-		|| pthread_mutex_init(dequeue, NULL))
+	if (pthread_mutex_init(print_mutex, NULL))
 		return (NULL);
+
 	while (i < params[NB_PHILOSOPHERS])
 	{
 		philosophers[i].id = i + 1;
@@ -82,8 +79,6 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 		philosophers[i].start_of_program = start_of_program;
 		philosophers[i].should_eat = 1;
 		philosophers[i].queue = queue;
-		philosophers[i].enqueue_lock = enqueue;
-		philosophers[i].dequeue_lock = dequeue;
 		if (i % 2)
 			philosophers[i].hand = 'r';
 		else

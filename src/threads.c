@@ -127,7 +127,7 @@ void	*routine(void *args)
 		return (NULL);
 	while (1)
 	{
-		while (!philo->should_eat){usleep(500);};
+		while (!philo->should_eat){printf("waiting to start [%d]\n", philo->id); usleep(500);};
 		mutex_print("wating for first fork", philo);
 		pthread_mutex_lock(first_fork);
 		mutex_print("has taken the first fork", philo);
@@ -138,14 +138,32 @@ void	*routine(void *args)
 		pthread_mutex_unlock(first_fork);
 		mutex_print("has dropped the first fork", philo);
 		pthread_mutex_unlock(second_fork);
-		philo_sleep(philo);
-		philo_think(philo);
-		pthread_mutex_lock(philo->enqueue_lock);
+		mutex_print("has dropeed the second fork", philo);
+		pthread_mutex_lock(philo->queue->enqueue_lock);
 		enqueue(philo->queue, philo);
 		philo->should_eat = 0;
-		pthread_mutex_unlock(philo->enqueue_lock);
-		mutex_print("has dropeed the second fork", philo);
+		pthread_mutex_unlock(philo->queue->enqueue_lock);
+		philo_sleep(philo);
+		philo_think(philo);
 		// add it to rear of queue
+	}
+	return (NULL);
+}
+
+void	*queue_watcher(void *args)
+{
+	t_philo_queue	*philo_queue;
+	philo_queue = (t_philo_queue*)args;
+
+	while (1) // need to find out how to stop it
+	{
+		while (philo_queue->size > philo_queue->capacity)
+		{
+			pthread_mutex_lock(philo_queue->dequeue_lock);
+			dequeue(philo_queue);
+			pthread_mutex_unlock(philo_queue->dequeue_lock);
+		}
+		usleep(200);
 	}
 	return (NULL);
 }
@@ -158,14 +176,17 @@ int	start(t_philo_data *philosophers, int *params)
 
 	i = 0;
 	g_terminate = 0;
+	if (pthread_create(&queue, NULL, queue_watcher, (void*)&(philosophers[0].queue)))
+		return (BAD_CREATE);
 	while (i < params[NB_PHILOSOPHERS])
 	{
+		printf("inside loop\n");
 		if (pthread_create(&philo[i], NULL, routine, (void*)&philosophers[i]))
 			return (BAD_CREATE);
 		// if (pthread_detach(philo[i]))
 		// 	return (BAD_DETACH);
 		++i;
 	}
-	pthread_join(philo[0], NULL);
+	pthread_join(queue, NULL);
 	return (0);
 }

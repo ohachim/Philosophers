@@ -50,9 +50,6 @@ int				enqueue(t_philo_queue* queue, t_philo_data *philo)
 	queue->philo_array[queue->rear] = philo;
 	queue->size += 1;
 	philo->should_eat = 0;
-	pthread_mutex_lock(philo->dequeue_lock); // not necessary
-	dequeue(queue);
-	pthread_mutex_unlock(philo->dequeue_lock);
 	return (1);
 }
 
@@ -65,6 +62,7 @@ int		dequeue(t_philo_queue* queue)
 	philo = queue->philo_array[queue->front];
 	queue->front = (queue->front + 1) % queue->capacity;
 	queue->size -= 1;
+	printf("philo to open is [%d]\n", philo->id);
 	philo->should_eat = 1;
 	return (1); // Might removed, I only need to switch it's lights on
 }
@@ -72,17 +70,24 @@ int		dequeue(t_philo_queue* queue)
 t_philo_queue	*create_queue(int capacity)
 {
 	t_philo_queue	*queue;
-
+	pthread_mutex_t		*enqueue;
+	pthread_mutex_t		*dequeue;
 
 	if (!capacity || capacity < 0)
 		return (NULL);
+	enqueue = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	dequeue = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	if (pthread_mutex_init(enqueue, NULL) || pthread_mutex_init(dequeue, NULL))
+		return (NULL);
 	queue = (t_philo_queue*)malloc(sizeof(t_philo_queue));
-	if (!queue)
+	if (!queue || !enqueue || !dequeue)
 		return (NULL);
 	queue->capacity = capacity;
 	queue->size = 0;
 	queue->front = 0;
 	queue->rear = capacity - 1;
+	queue->dequeue_lock = dequeue;
+	queue->enqueue_lock = enqueue;
 	queue->philo_array = (t_philo_data**)malloc(sizeof(t_philo_data*) * capacity);
 	if (!queue->philo_array)
 		return (NULL);
