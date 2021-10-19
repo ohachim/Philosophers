@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/16 17:53:21 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/19 21:24:41 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	*death_watch(void *args)
 		{
 			exit(0); // for now;
 		}
-		usleep(500);
+		usleep(200);
 	}
 	return NULL;
 }
@@ -111,38 +111,54 @@ void	*routine(void *args)
 {
 	t_philo_data *philo;
 	pthread_t			watcher;
-	pthread_mutex_t	*first_fork;
-	pthread_mutex_t	*second_fork;
+	t_fork	*first_fork;
+	t_fork	*second_fork;
 
 	philo = (t_philo_data*)args;
 	first_fork = (philo->right_fork->id < philo->left_fork->id)
-					? &(philo->right_fork->fork_protect)
-					: &(philo->left_fork->fork_protect);
+					? (philo->right_fork)
+					: (philo->left_fork);
 
 	second_fork =  (philo->right_fork->id > philo->left_fork->id)
-					? &(philo->right_fork->fork_protect)
-					: &(philo->left_fork->fork_protect);
+					? (philo->right_fork)
+					: (philo->left_fork);
 	gettimeofday(&philo->last_eat_time, NULL);
 	if (pthread_create(&watcher, NULL, death_watch, philo))
 		return (NULL);
 	while (1)
 	{
-		while (!philo->should_eat){printf("waiting to start [%d]\n", philo->id); usleep(500);};
+		while (!philo->should_eat)
+		{
+			usleep(200);
+		}
 		mutex_print("wating for first fork", philo);
-		pthread_mutex_lock(first_fork);
+		pthread_mutex_lock(&first_fork->fork_protect);
+		first_fork->used = 1;
 		mutex_print("has taken the first fork", philo);
 		mutex_print("wating for second fork", philo);
-		pthread_mutex_lock(second_fork);
+		pthread_mutex_lock(&second_fork->fork_protect);
+		second_fork->used = 1;
 		mutex_print("has taken the second fork", philo);
 		philo_eat(philo);
-		pthread_mutex_unlock(first_fork);
+		pthread_mutex_unlock(&first_fork->fork_protect);
+		first_fork->used = 0;
 		mutex_print("has dropped the first fork", philo);
-		pthread_mutex_unlock(second_fork);
+		pthread_mutex_unlock(&second_fork->fork_protect);
+		second_fork->used = 0;
 		mutex_print("has dropeed the second fork", philo);
-		pthread_mutex_lock(philo->queue->enqueue_lock);
-		enqueue(philo->queue, philo);
-		philo->should_eat = 0;
-		pthread_mutex_unlock(philo->queue->enqueue_lock);
+		if (!(philo->id % 2))
+		{
+			pthread_mutex_lock(&philo->even_queue->lock);
+			enqueue(philo->odd_queue, philo);
+			pthread_mutex_unlock(&philo->even_queue->lock);
+		}
+		else
+		{
+			pthread_mutex_lock(&philo->odd_queue->lock);
+			enqueue(philo->odd_queue, philo);
+			pthread_mutex_unlock(&philo->odd_queue->lock);
+		}
+		philo->should_eat = 0; // should maybe add it to enqueue
 		philo_sleep(philo);
 		philo_think(philo);
 		// add it to rear of queue
@@ -152,18 +168,27 @@ void	*routine(void *args)
 
 void	*queue_watcher(void *args)
 {
-	t_philo_queue	*philo_queue;
-	philo_queue = (t_philo_queue*)args;
-
+	int i;
+	
+	t_philo_data *philo = (t_philo_data*)args;
 	while (1) // need to find out how to stop it
 	{
-		while (philo_queue->size > philo_queue->capacity)
+		printf("start of loop\n");
+		i = 0;
+		if (!(front(philo->odd_queue))->left_fork->used && !(front(philo->odd_queue))->right_fork->used)
 		{
-			pthread_mutex_lock(philo_queue->dequeue_lock);
-			dequeue(philo_queue);
-			pthread_mutex_unlock(philo_queue->dequeue_lock);
+			pthread_mutex_lock(&philo->odd_queue->lock);
+			dequeue(philo->odd_queue);
+			pthread_mutex_unlock(&philo->odd_queue->lock);
+		}
+		if (!(front(philo->even_queue))->left_fork->used && !(front(philo->even_queue))->right_fork->used)
+		{
+			pthread_mutex_lock(&philo->even_queue->lock);
+			dequeue(philo->even_queue);
+			pthread_mutex_unlock(&philo->even_queue->lock);
 		}
 		usleep(200);
+		printf("end of loop\n");
 	}
 	return (NULL);
 }
@@ -176,15 +201,15 @@ int	start(t_philo_data *philosophers, int *params)
 
 	i = 0;
 	g_terminate = 0;
-	if (pthread_create(&queue, NULL, queue_watcher, (void*)&(philosophers[0].queue)))
+	printf("do I get here\n");
+	if (pthread_create(&queue, NULL, queue_watcher, (void*)&(philosophers[i])))
 		return (BAD_CREATE);
 	while (i < params[NB_PHILOSOPHERS])
 	{
-		printf("inside loop\n");
 		if (pthread_create(&philo[i], NULL, routine, (void*)&philosophers[i]))
 			return (BAD_CREATE);
-		// if (pthread_detach(philo[i]))
-		// 	return (BAD_DETACH);
+		if (pthread_detach(philo[i]))
+			return (BAD_DETACH);
 		++i;
 	}
 	pthread_join(queue, NULL);

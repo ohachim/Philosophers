@@ -1,0 +1,138 @@
+Enqueed philo num: 1
+size of queue 1
+Enqueed philo num: 2
+size of queue 2
+Enqueed philo num: 3
+size of queue 3
+Enqueed philo num: 4
+size of queue 4
+Enqueed philo num: 5
+size of queue 5
+queue size is 5
+dequeed philo num: 1
+dequeed philo num: 2
+dequeed philo num: 3
+dequeed philo num: 4
+[0]	2 wating for first fork
+[0]	2 has taken the first fork
+[0]	2 wating for second fork
+[0]	2 has taken the second fork
+[0]	2 is eating
+[0]	3 wating for first fork
+[1]	4 wating for first fork
+[1]	4 has taken the first fork
+[1]	4 wating for second fork
+[1]	4 has taken the second fork
+[1]	4 is eating
+[1]	1 wating for first fork
+[1]	1 has taken the first fork
+[1]	1 wating for second fork
+dequeed philo num: 5
+[1]	5 wating for first fork
+[201]	2 has dropped the first fork
+[201]	2 has dropeed the second fork
+Enqueed philo num: 2
+[201]	2 is sleeping
+[201]	1 has taken the second fork
+[201]	1 is eating
+[201]	4 has dropped the first fork
+[201]	4 has dropeed the second fork
+Enqueed philo num: 4
+[201]	4 is sleeping
+[201]	3 has taken the first fork
+[201]	3 wating for second fork
+[201]	3 has taken the second fork
+[201]	3 is eating
+dequeed philo num: 2
+dequeed philo num: 4
+[401]	2 is thinking
+[401]	2 wating for first fork
+[401]	3 has dropped the first fork
+[401]	3 has dropeed the second fork
+Enqueed philo num: 3
+[401]	1 has dropped the first fork
+[401]	1 has dropeed the second fork
+[401]	2 has taken the first fork
+Enqueed philo num: 1
+[401]	1 is sleeping
+[401]	4 is thinking
+[401]	5 has taken the first fork
+[401]	4 wating for first fork
+[401]	4 has taken the first fork
+[401]	4 wating for second fork
+[401]	4 has taken the second fork
+[401]	4 is eating
+[401]	5 wating for second fork
+[401]	3 is sleeping
+[401]	2 wating for second fork
+[401]	2 has taken the second fork
+[401]	2 is eating
+dequeed philo num: 3
+dequeed philo num: 1
+[602]	1 is thinking
+[602]	4 has dropped the first fork
+[602]	2 has dropped the first fork
+[602]	4 has dropeed the second fork
+Enqueed philo num: 4
+[602]	4 is sleeping
+[602]	2 has dropeed the second fork
+[602]	5 has taken the second fork
+Enqueed philo num: 2
+[602]	2 is sleeping
+[602]	5 is eating
+[602]	1 wating for first fork
+[602]	3 is thinking
+[602]	3 wating for first fork
+[602]	3 has taken the first fork
+[602]	3 wating for second fork
+[602]	3 has taken the second fork
+[602]	3 is eating
+dequeed philo num: 4
+dequeed philo num: 2
+[802]	4 is thinking
+[802]	4 wating for first fork
+[802]	2 is thinking
+[802]	3 has dropped the first fork
+[802]	5 has dropped the first fork
+[802]	4 has taken the first fork
+[802]	5 has dropeed the second fork
+[802]	4 wating for second fork
+[802]	4 has taken the second fork
+[802]	4 is eating
+Enqueed philo num: 5
+[802]	2 wating for first fork
+[802]	1 has taken the first fork
+[802]	1 wating for second fork
+[802]	1 has taken the second fork
+[802]	5 is sleeping
+[802]	1 is eating
+[802]	3 has dropeed the second fork
+Enqueed philo num: 3
+[802]	3 is sleeping
+dequeed philo num: 5
+dequeed philo num: 3
+[1006]	5 is thinking
+[1006]	1 has dropped the first fork
+[1006]	3 is thinking
+[1006]	3 wating for first fork
+[1006]	1 has dropeed the second fork
+[1006]	3 has taken the first fork
+Enqueed philo num: 1
+[1006]	1 is sleeping
+[1006]	3 wating for second fork
+[1006]	5 wating for first fork
+[1006]	2 has taken the first fork
+[1006]	2 wating for second fork
+[1006]	4 has dropped the first fork
+[1006]	3 has taken the second fork
+[1006]	3 is eating
+[1006]	5 has taken the first fork
+[1006]	5 wating for second fork
+[1006]	5 has taken the second fork
+[1006]	5 is eating
+[1006]	4 has dropeed the second fork
+Enqueed philo num: 4
+[1006]	4 is sleeping
+dequeed philo num: 1
+dequeed philo num: 4
+[1202]	 diffrence 801, philo id 2

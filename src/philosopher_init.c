@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/16 17:35:32 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/19 21:26:21 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	make_forks(int *params, t_fork **forks)
 			return (FAIL_MUTEX_INIT);// TODO: CHANGE
 		}
 		(*forks)[i].id = i;
+		(*forks)[i].used = 0;
 		++i;
 	}
 	return (0);
@@ -55,17 +56,20 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 	t_philo_data		*philosophers;
 	pthread_mutex_t		*print_mutex;
 
-	t_philo_queue		*queue;
+	t_philo_queue		*even_queue;
+	t_philo_queue		*odd_queue;
 	int					i;
 
+	printf("starting init\n");
 	i = 0;
-	queue = create_queue(params[NB_PHILOSOPHERS]);
+	even_queue = create_queue(params[NB_PHILOSOPHERS] / 2);
+	odd_queue = create_queue((params[NB_PHILOSOPHERS] / 2) + 1);
 	philosophers = (t_philo_data*)malloc(sizeof(t_philo_data)
 											* params[NB_PHILOSOPHERS]);
-
-	print_mutex = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	if (!philosophers || !queue)
+	if (!philosophers || !even_queue || !odd_queue)
 		return (NULL);
+	printf("starting init0\n");
+	print_mutex = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(print_mutex, NULL))
 		return (NULL);
 
@@ -77,12 +81,13 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 		philosophers[i].params = params;
 		philosophers[i].print_mutex = print_mutex;
 		philosophers[i].start_of_program = start_of_program;
-		philosophers[i].should_eat = 1;
-		philosophers[i].queue = queue;
-		if (i % 2)
-			philosophers[i].hand = 'r';
+		philosophers[i].should_eat = 0;
+		philosophers[i].even_queue = even_queue;
+		philosophers[i].odd_queue = odd_queue;
+		if ((i + 1) % 2)
+			enqueue(odd_queue, &philosophers[i]); // some high quality "spaghetti code" right here
 		else
-			philosophers[i].hand = 'l';
+			enqueue(even_queue, &philosophers[i]);
 		if (pthread_mutex_init(&philosophers[i].death_mutex, NULL))
 			return (NULL);
 		if (i == params[NB_PHILOSOPHERS] - 1) // If this is the last philosopher, his right fork should be the 0th fork

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:40:05 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/16 17:49:57 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/19 21:23:27 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ int				enqueue(t_philo_queue* queue, t_philo_data *philo)
 {
 	if (is_full(queue))
 		return -1;
-
+	printf("Enqueed philo num: %d\n", philo->id);
 	queue->rear = (queue->rear + 1) % queue->capacity;
 	queue->philo_array[queue->rear] = philo;
 	queue->size += 1;
-	philo->should_eat = 0;
 	return (1);
 }
 
@@ -60,9 +59,9 @@ int		dequeue(t_philo_queue* queue)
 	if (is_empty(queue))
 		return (-1);
 	philo = queue->philo_array[queue->front];
+	printf("dequeed philo num: %d\n", philo->id);
 	queue->front = (queue->front + 1) % queue->capacity;
 	queue->size -= 1;
-	printf("philo to open is [%d]\n", philo->id);
 	philo->should_eat = 1;
 	return (1); // Might removed, I only need to switch it's lights on
 }
@@ -70,26 +69,22 @@ int		dequeue(t_philo_queue* queue)
 t_philo_queue	*create_queue(int capacity)
 {
 	t_philo_queue	*queue;
-	pthread_mutex_t		*enqueue;
-	pthread_mutex_t		*dequeue;
 
 	if (!capacity || capacity < 0)
 		return (NULL);
-	enqueue = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	dequeue = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(enqueue, NULL) || pthread_mutex_init(dequeue, NULL))
-		return (NULL);
 	queue = (t_philo_queue*)malloc(sizeof(t_philo_queue));
-	if (!queue || !enqueue || !dequeue)
+	if (!queue)
 		return (NULL);
 	queue->capacity = capacity;
 	queue->size = 0;
 	queue->front = 0;
 	queue->rear = capacity - 1;
-	queue->dequeue_lock = dequeue;
-	queue->enqueue_lock = enqueue;
+	if (pthread_mutex_init(&queue->lock, NULL) || pthread_mutex_init(&queue->lock, NULL))
+		return (NULL);
 	queue->philo_array = (t_philo_data**)malloc(sizeof(t_philo_data*) * capacity);
 	if (!queue->philo_array)
 		return (NULL);
 	return (queue);
 }
+
+// two queues, one with pair philos, one with even ones

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/16 17:44:09 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/19 21:08:18 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <sys/time.h>
+#include <string.h>
 
 enum {
 	BAD_ALLOC = 1,
@@ -43,6 +44,7 @@ int						g_terminate; // Usless
 
 typedef struct 		s_fork { // needs to be freed
 	unsigned int	id; // TODO: not needed?
+	int				used;
 	pthread_mutex_t fork_protect; // needs to be destroyed
 } 					t_fork;
 
@@ -60,16 +62,16 @@ typedef struct				s_philo_data { // needs to be freed
 	pthread_mutex_t 		*print_mutex; // needs to be destroyed and freed
 	pthread_mutex_t 		death_mutex; // needs to be destroyed
 
-	struct s_philo_queue	*queue;
+	struct s_philo_queue	*even_queue;
+	struct s_philo_queue	*odd_queue;
 }							t_philo_data;
 typedef struct 			s_philo_queue {
 	int 				size;
 	int 				front;
 	int 				rear;
-	pthread_mutex_t		*enqueue_lock;
-	pthread_mutex_t		*dequeue_lock;
+	pthread_mutex_t		lock;
 	unsigned int 		capacity;
-	t_philo_data		**philo_array; // hmmmm
+	t_philo_data		**philo_array;
 }						t_philo_queue;
 
 int					my_atoi(char *str);
