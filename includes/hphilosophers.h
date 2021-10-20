@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/19 21:08:18 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:05:37 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ typedef struct				s_philo_data { // needs to be freed
 	pthread_mutex_t 		*print_mutex; // needs to be destroyed and freed
 	pthread_mutex_t 		death_mutex; // needs to be destroyed
 
-	struct s_philo_queue	*even_queue;
-	struct s_philo_queue	*odd_queue;
+	struct s_philo_queue	*queue;
 }							t_philo_data;
 typedef struct 			s_philo_queue {
 	int 				size;
@@ -97,5 +96,5 @@ int					is_full(t_philo_queue *queue);
 int					is_empty(t_philo_queue *queue);
 t_philo_data		*front(t_philo_queue *queue);
 t_philo_data		*rear(t_philo_queue* queue);
-
+void				swap(int a, int b, t_philo_queue *queue);
 #endif

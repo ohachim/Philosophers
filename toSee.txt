@@ -1,0 +1,6 @@
+starting init
+Enqueed philo num: 1
+Enqueed philo num: 2
+Enqueed philo num: 3
+Enqueed philo num: 4
+2 front 1 int

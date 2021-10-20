@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:40:05 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/19 21:23:27 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:02:05 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ t_philo_data	*rear(t_philo_queue* queue)
 	return (queue->philo_array[queue->rear]);
 }
 
+void			swap(int a, int b, t_philo_queue *queue)
+{
+	t_philo_data	*temp;
+
+	temp = queue->philo_array[a];
+	queue->philo_array[a] = queue->philo_array[b];
+	queue->philo_array[b] = temp;
+}
+
 int				enqueue(t_philo_queue* queue, t_philo_data *philo)
 {
 	if (is_full(queue))
@@ -60,6 +69,8 @@ int		dequeue(t_philo_queue* queue)
 		return (-1);
 	philo = queue->philo_array[queue->front];
 	printf("dequeed philo num: %d\n", philo->id);
+	philo->left_fork->used = 1;
+	philo->right_fork->used = 1;
 	queue->front = (queue->front + 1) % queue->capacity;
 	queue->size -= 1;
 	philo->should_eat = 1;

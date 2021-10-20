@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/19 21:24:41 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:29:48 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@ void	print_time_stamp( struct timeval start_of_program )
 	end = get_milliseconds(current_time.tv_sec, current_time.tv_usec);
 	printf("[%u]\t", end - start);
 }
-
-
-// int main( void )
-// {
-// 	struct timeval current_time;
-
-// 	gettimeofday(&current_time, NULL);
-// 	unsigned int start = get_milliseconds(current_time.tv_sec, current_time.tv_usec);
-// 	unsigned int send = 
-// 	printf("ah shit here we go [%u]\n", start);
-// }
 
 int		calculate_death(t_philo_data *philo)
 {
@@ -129,7 +118,6 @@ void	*routine(void *args)
 	{
 		while (!philo->should_eat)
 		{
-			usleep(200);
 		}
 		mutex_print("wating for first fork", philo);
 		pthread_mutex_lock(&first_fork->fork_protect);
@@ -146,18 +134,9 @@ void	*routine(void *args)
 		pthread_mutex_unlock(&second_fork->fork_protect);
 		second_fork->used = 0;
 		mutex_print("has dropeed the second fork", philo);
-		if (!(philo->id % 2))
-		{
-			pthread_mutex_lock(&philo->even_queue->lock);
-			enqueue(philo->odd_queue, philo);
-			pthread_mutex_unlock(&philo->even_queue->lock);
-		}
-		else
-		{
-			pthread_mutex_lock(&philo->odd_queue->lock);
-			enqueue(philo->odd_queue, philo);
-			pthread_mutex_unlock(&philo->odd_queue->lock);
-		}
+		pthread_mutex_lock(&philo->queue->lock);
+		enqueue(philo->queue, philo);
+		pthread_mutex_unlock(&philo->queue->lock);
 		philo->should_eat = 0; // should maybe add it to enqueue
 		philo_sleep(philo);
 		philo_think(philo);
@@ -173,22 +152,16 @@ void	*queue_watcher(void *args)
 	t_philo_data *philo = (t_philo_data*)args;
 	while (1) // need to find out how to stop it
 	{
-		printf("start of loop\n");
 		i = 0;
-		if (!(front(philo->odd_queue))->left_fork->used && !(front(philo->odd_queue))->right_fork->used)
+		printf(" queue size: %d\n", philo->queue->size);
+		if (!is_empty(philo->queue) && !(front(philo->queue))->left_fork->used && !(front(philo->queue))->right_fork->used)
 		{
-			pthread_mutex_lock(&philo->odd_queue->lock);
-			dequeue(philo->odd_queue);
-			pthread_mutex_unlock(&philo->odd_queue->lock);
-		}
-		if (!(front(philo->even_queue))->left_fork->used && !(front(philo->even_queue))->right_fork->used)
-		{
-			pthread_mutex_lock(&philo->even_queue->lock);
-			dequeue(philo->even_queue);
-			pthread_mutex_unlock(&philo->even_queue->lock);
+			pthread_mutex_lock(&philo->queue->lock);
+			printf("will dequeue odd\n");
+			dequeue(philo->queue);
+			pthread_mutex_unlock(&philo->queue->lock);
 		}
 		usleep(200);
-		printf("end of loop\n");
 	}
 	return (NULL);
 }

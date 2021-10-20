@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/19 21:26:21 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:47:15 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,33 @@ int	make_forks(int *params, t_fork **forks)
 	return (0);
 }
 
+void			order_philos(t_philo_queue *queue)
+{
+	int i;
+
+	i = 1;
+	while (i < queue->capacity)
+	{
+		swap(i, i+1, queue);
+		i += 3;
+	}
+}
+
 t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start_of_program)
 {
 	t_philo_data		*philosophers;
 	pthread_mutex_t		*print_mutex;
 
-	t_philo_queue		*even_queue;
-	t_philo_queue		*odd_queue;
+	t_philo_queue		*queue;
 	int					i;
 
 	printf("starting init\n");
 	i = 0;
-	even_queue = create_queue(params[NB_PHILOSOPHERS] / 2);
-	odd_queue = create_queue((params[NB_PHILOSOPHERS] / 2) + 1);
+	queue = create_queue(params[NB_PHILOSOPHERS]);
 	philosophers = (t_philo_data*)malloc(sizeof(t_philo_data)
 											* params[NB_PHILOSOPHERS]);
-	if (!philosophers || !even_queue || !odd_queue)
+	if (!philosophers)
 		return (NULL);
-	printf("starting init0\n");
 	print_mutex = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(print_mutex, NULL))
 		return (NULL);
@@ -82,12 +91,8 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 		philosophers[i].print_mutex = print_mutex;
 		philosophers[i].start_of_program = start_of_program;
 		philosophers[i].should_eat = 0;
-		philosophers[i].even_queue = even_queue;
-		philosophers[i].odd_queue = odd_queue;
-		if ((i + 1) % 2)
-			enqueue(odd_queue, &philosophers[i]); // some high quality "spaghetti code" right here
-		else
-			enqueue(even_queue, &philosophers[i]);
+		philosophers[i].queue = queue;
+		enqueue(queue, &philosophers[i]); // some high quality "spaghetti code" right here
 		if (pthread_mutex_init(&philosophers[i].death_mutex, NULL))
 			return (NULL);
 		if (i == params[NB_PHILOSOPHERS] - 1) // If this is the last philosopher, his right fork should be the 0th fork
@@ -96,5 +101,7 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 			philosophers[i].right_fork = &forks[(i + 1) % params[NB_FORKS]];
 		++i;
 	}
+	order_philos(queue);
+	
 	return (philosophers);
 }
