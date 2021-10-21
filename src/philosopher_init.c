@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/20 15:47:15 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/21 11:52:37 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 			philosophers[i].right_fork = &forks[(i + 1) % params[NB_FORKS]];
 		++i;
 	}
-	order_philos(queue);
-	
+	// order_philos(queue);
 	return (philosophers);
 }

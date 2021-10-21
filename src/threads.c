@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/20 15:29:48 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/21 16:48:24 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	*routine(void *args)
 	{
 		while (!philo->should_eat)
 		{
+			usleep(200);
 		}
 		mutex_print("wating for first fork", philo);
 		pthread_mutex_lock(&first_fork->fork_protect);
@@ -145,21 +146,52 @@ void	*routine(void *args)
 	return (NULL);
 }
 
+int		forks_used(t_philo_data* philo)
+{
+	if (philo->left_fork->used || philo->right_fork->used)
+		return (1);
+	return (0);
+}
+
+void	swap_next_philo(t_philo_queue* queue)
+{
+	int j;
+
+	j = queue->front + 1;
+	while (j < queue->rear)
+	{
+		swap(queue->front, j, queue);
+		if (!forks_used(queue->philo_array[0]))
+			break;
+		++j;
+	}
+}
+void	print_queue(t_philo_queue *queue)
+{
+}
 void	*queue_watcher(void *args)
 {
 	int i;
+	int	num_eating;
 	
 	t_philo_data *philo = (t_philo_data*)args;
 	while (1) // need to find out how to stop it
 	{
 		i = 0;
-		printf(" queue size: %d\n", philo->queue->size);
-		if (!is_empty(philo->queue) && !(front(philo->queue))->left_fork->used && !(front(philo->queue))->right_fork->used)
+		num_eating = 0;
+		while (num_eating < philo->params[NB_PHILOSOPHERS] / 2 && !is_empty(philo->queue))
 		{
-			pthread_mutex_lock(&philo->queue->lock);
-			printf("will dequeue odd\n");
-			dequeue(philo->queue);
-			pthread_mutex_unlock(&philo->queue->lock);
+			if (!forks_used(front(philo->queue)))
+			{
+				pthread_mutex_lock(&philo->queue->lock);
+				dequeue(philo->queue);
+				pthread_mutex_unlock(&philo->queue->lock);
+				++num_eating;
+			}
+			else
+				swap_next_philo(philo->queue);
+			++i;
+			// Might put lock/unlock outside of loop
 		}
 		usleep(200);
 	}
