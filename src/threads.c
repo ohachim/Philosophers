@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/22 15:59:03 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/22 16:14:02 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	*routine(void *args)
 
 int		forks_used(t_philo_data* philo)
 {
-	printf("philo->id %d\n", philo->id);
+	printf("checked philo->id forks: %d\n", philo->id);
 	if (philo->left_fork->used || philo->right_fork->used)
 		return (1);
 	return (0);
@@ -193,15 +193,25 @@ void	swap_next_philo(t_philo_queue* queue)
 		swaps += 1;
 	}
 }
+
+int		divide_by_2(int num)
+{
+	if (num % 2)
+		return (num / 2);
+	return ((num / 2) + 1);
+}
+
 void	*queue_watcher(void *args)
 {
 	int	num_eating;
-	
+	int	nb_phil_half;
+
 	t_philo_data *philo = (t_philo_data*)args;
+	nb_phil_half = divide_by_2(philo->params[NB_PHILOSOPHERS]);
 	while (1) // need to find out how to stop it
 	{
 		num_eating = 0;
-		while (philo->queue->size > philo->params[NB_PHILOSOPHERS] / 2)
+		while (philo->queue->size > nb_phil_half)
 		{
 			printf("Queue->size: %d\n", philo->queue->size);
 			print_queue(philo->queue);
@@ -217,7 +227,7 @@ void	*queue_watcher(void *args)
 			else
 				swap_next_philo(philo->queue);			// Might put lock/unlock outside of loop
 		}
-		usleep(200);
+		usleep(100);
 	}
 	return (NULL);
 }
