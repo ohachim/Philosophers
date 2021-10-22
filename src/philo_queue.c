@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:40:05 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/20 15:02:05 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/22 15:46:22 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_philo_queue	*create_queue(int capacity)
 {
 	t_philo_queue	*queue;
 
-	if (!capacity || capacity < 0)
+	if (capacity <= 0)
 		return (NULL);
 	queue = (t_philo_queue*)malloc(sizeof(t_philo_queue));
 	if (!queue)

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/21 16:48:24 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/22 15:59:03 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,50 +148,74 @@ void	*routine(void *args)
 
 int		forks_used(t_philo_data* philo)
 {
+	printf("philo->id %d\n", philo->id);
 	if (philo->left_fork->used || philo->right_fork->used)
 		return (1);
 	return (0);
+}
+//TODO: to remove rear
+void	print_queue(t_philo_queue *queue)
+{
+	int i;
+	int written;
+
+	i = queue->front;
+	written = 0;
+	while (written < queue->size)
+	{
+		printf("[%d]", queue->philo_array[i]->id);
+		i = (i + 1) % queue->capacity;
+		++written;
+	}
+	printf(" [queue size: %d, queue front: %d, queue rear: %d].\n", queue->size, queue->front, queue->rear);
 }
 
 void	swap_next_philo(t_philo_queue* queue)
 {
 	int j;
+	int swaps;
 
 	j = queue->front + 1;
-	while (j < queue->rear)
+	swaps = 0;
+	printf("swapping for next available philo in queue size %d\n", queue->size);
+	while (swaps < queue->size - 1)
 	{
+		printf("before swap: ");
+		print_queue(queue);
+		pthread_mutex_lock(&queue->lock);
 		swap(queue->front, j, queue);
-		if (!forks_used(queue->philo_array[0]))
+		pthread_mutex_unlock(&queue->lock);
+		printf("after swap: ");
+		print_queue(queue);
+		if (!forks_used(queue->philo_array[queue->front]))
 			break;
-		++j;
+		j = (j + 1) % queue->capacity;
+		swaps += 1;
 	}
-}
-void	print_queue(t_philo_queue *queue)
-{
 }
 void	*queue_watcher(void *args)
 {
-	int i;
 	int	num_eating;
 	
 	t_philo_data *philo = (t_philo_data*)args;
 	while (1) // need to find out how to stop it
 	{
-		i = 0;
 		num_eating = 0;
-		while (num_eating < philo->params[NB_PHILOSOPHERS] / 2 && !is_empty(philo->queue))
+		while (philo->queue->size > philo->params[NB_PHILOSOPHERS] / 2)
 		{
+			printf("Queue->size: %d\n", philo->queue->size);
+			print_queue(philo->queue);
 			if (!forks_used(front(philo->queue)))
 			{
 				pthread_mutex_lock(&philo->queue->lock);
+				printf("Before dequeue %d\n", philo->queue->size);
 				dequeue(philo->queue);
+				printf("after dequeue %d\n", philo->queue->size);
 				pthread_mutex_unlock(&philo->queue->lock);
 				++num_eating;
 			}
 			else
-				swap_next_philo(philo->queue);
-			++i;
-			// Might put lock/unlock outside of loop
+				swap_next_philo(philo->queue);			// Might put lock/unlock outside of loop
 		}
 		usleep(200);
 	}
