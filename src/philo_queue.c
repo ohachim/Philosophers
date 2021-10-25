@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:40:05 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/22 15:46:22 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/25 15:17:57 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ int		dequeue(t_philo_queue* queue)
 {
 	t_philo_data	*philo;
 
-	if (is_empty(queue))
+	if (is_empty(queue) && printf("this is empty my dud\n"))
 		return (-1);
-	philo = queue->philo_array[queue->front];
 	printf("dequeed philo num: %d\n", philo->id);
+	philo = queue->philo_array[queue->front];
 	philo->left_fork->used = 1;
 	philo->right_fork->used = 1;
-	queue->front = (queue->front + 1) % queue->capacity;
-	queue->size -= 1;
 	philo->should_eat = 1;
-	return (1); // Might removed, I only need to switch it's lights on
+	queue->size -= 1;
+	queue->front = (queue->front + 1) % queue->capacity;
+	return (1); // Might remove, I only need to switch it's lights on
 }
 
 t_philo_queue	*create_queue(int capacity)

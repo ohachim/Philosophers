@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/22 16:14:02 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/25 14:51:59 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void	*routine(void *args)
 		philo->should_eat = 0; // should maybe add it to enqueue
 		philo_sleep(philo);
 		philo_think(philo);
+		// mutex_print("is ready to eat\n", philo);
 		// add it to rear of queue
 	}
 	return (NULL);
@@ -148,9 +149,13 @@ void	*routine(void *args)
 
 int		forks_used(t_philo_data* philo)
 {
-	printf("checked philo->id forks: %d\n", philo->id);
+	printf("checked philo->id forks: %d", philo->id);
 	if (philo->left_fork->used || philo->right_fork->used)
+	{
+		printf(", its forks are not ready.\n");
 		return (1);
+	}
+	printf(", its forks are ready.\n");
 	return (0);
 }
 //TODO: to remove rear
@@ -163,6 +168,7 @@ void	print_queue(t_philo_queue *queue)
 	written = 0;
 	while (written < queue->size)
 	{
+		printf("i is %d\n", i);
 		printf("[%d]", queue->philo_array[i]->id);
 		i = (i + 1) % queue->capacity;
 		++written;
@@ -170,7 +176,7 @@ void	print_queue(t_philo_queue *queue)
 	printf(" [queue size: %d, queue front: %d, queue rear: %d].\n", queue->size, queue->front, queue->rear);
 }
 
-void	swap_next_philo(t_philo_queue* queue)
+void	swap_next_philo(t_philo_queue* queue) // wastest too much power?
 {
 	int j;
 	int swaps;
@@ -185,47 +191,46 @@ void	swap_next_philo(t_philo_queue* queue)
 		pthread_mutex_lock(&queue->lock);
 		swap(queue->front, j, queue);
 		pthread_mutex_unlock(&queue->lock);
-		printf("after swap: ");
+		printf("indexes swapped are: %d %d==> after swap: ", queue->front, j);
 		print_queue(queue);
 		if (!forks_used(queue->philo_array[queue->front]))
 			break;
 		j = (j + 1) % queue->capacity;
 		swaps += 1;
+		usleep(100); // well wut can I say?
 	}
 }
 
 int		divide_by_2(int num)
 {
-	if (num % 2)
+	if (!(num % 2))
 		return (num / 2);
 	return ((num / 2) + 1);
 }
 
 void	*queue_watcher(void *args)
 {
-	int	num_eating;
 	int	nb_phil_half;
 
-	t_philo_data *philo = (t_philo_data*)args;
-	nb_phil_half = divide_by_2(philo->params[NB_PHILOSOPHERS]);
+	t_philo_queue *queue = (t_philo_queue*)args;
+	nb_phil_half = divide_by_2(queue->capacity);
+	printf("nb_phil_half: %d.\n", nb_phil_half);
 	while (1) // need to find out how to stop it
 	{
-		num_eating = 0;
-		while (philo->queue->size > nb_phil_half)
+		while (queue->size > nb_phil_half)
 		{
-			printf("Queue->size: %d\n", philo->queue->size);
-			print_queue(philo->queue);
-			if (!forks_used(front(philo->queue)))
+			printf("at beginning of loop Queue->size: %d\n", queue->size);
+			print_queue(queue);
+			if (!forks_used(front(queue)))
 			{
-				pthread_mutex_lock(&philo->queue->lock);
-				printf("Before dequeue %d\n", philo->queue->size);
-				dequeue(philo->queue);
-				printf("after dequeue %d\n", philo->queue->size);
-				pthread_mutex_unlock(&philo->queue->lock);
-				++num_eating;
+				pthread_mutex_lock(&queue->lock);
+				printf("Before dequeue , queue->size is %d\n", queue->size);
+				dequeue(queue);
+				printf("after dequeue , queue->size is %d\n", queue->size);
+				pthread_mutex_unlock(&queue->lock);
 			}
 			else
-				swap_next_philo(philo->queue);			// Might put lock/unlock outside of loop
+				swap_next_philo(queue);			// Might put lock/unlock outside of loop
 		}
 		usleep(100);
 	}
@@ -241,7 +246,7 @@ int	start(t_philo_data *philosophers, int *params)
 	i = 0;
 	g_terminate = 0;
 	printf("do I get here\n");
-	if (pthread_create(&queue, NULL, queue_watcher, (void*)&(philosophers[i])))
+	if (pthread_create(&queue, NULL, queue_watcher, (void*)philosophers[i].queue))
 		return (BAD_CREATE);
 	while (i < params[NB_PHILOSOPHERS])
 	{
