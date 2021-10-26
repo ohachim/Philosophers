@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/25 14:42:02 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/26 16:53:31 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void				philo_eat(t_philo_data *philo);
 int					start(t_philo_data *philosophers, int *params);
 void				*routine(void *args);
 void				*watch_philos(void *args);
-t_philo_data		*make_philosophers(int *params, t_fork *forks, struct timeval start_of_program);
+t_philo_data		**make_philosophers(int *params, t_fork *forks, struct timeval start_of_program);
 int					make_forks(int *params, t_fork **forks);
 void				init_parameters(char **argv, int *params, int argc);
 int					error(int errno);

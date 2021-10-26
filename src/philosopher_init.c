@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/21 11:52:37 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/26 16:53:44 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,9 @@ int	make_forks(int *params, t_fork **forks)
 	return (0);
 }
 
-void			order_philos(t_philo_queue *queue)
+t_philo_data	**make_philosophers(int *params, t_fork *forks, struct timeval start_of_program)
 {
-	int i;
-
-	i = 1;
-	while (i < queue->capacity)
-	{
-		swap(i, i+1, queue);
-		i += 3;
-	}
-}
-
-t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start_of_program)
-{
-	t_philo_data		*philosophers;
+	t_philo_data		**philosophers;
 	pthread_mutex_t		*print_mutex;
 
 	t_philo_queue		*queue;
@@ -74,7 +62,7 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 	printf("starting init\n");
 	i = 0;
 	queue = create_queue(params[NB_PHILOSOPHERS]);
-	philosophers = (t_philo_data*)malloc(sizeof(t_philo_data)
+	philosophers = (t_philo_data**)malloc(sizeof(t_philo_data*)
 											* params[NB_PHILOSOPHERS]);
 	if (!philosophers)
 		return (NULL);
@@ -82,25 +70,37 @@ t_philo_data	*make_philosophers(int *params, t_fork *forks, struct timeval start
 	if (pthread_mutex_init(print_mutex, NULL))
 		return (NULL);
 
+	printf("%p, the adress of queue\n", queue);
 	while (i < params[NB_PHILOSOPHERS])
 	{
-		philosophers[i].id = i + 1;
-		philosophers[i].number_eats = 0;// How many times it has eaten, 0 at start
-		philosophers[i].left_fork = &forks[i];
-		philosophers[i].params = params;
-		philosophers[i].print_mutex = print_mutex;
-		philosophers[i].start_of_program = start_of_program;
-		philosophers[i].should_eat = 0;
-		philosophers[i].queue = queue;
-		enqueue(queue, &philosophers[i]); // some high quality "spaghetti code" right here
-		if (pthread_mutex_init(&philosophers[i].death_mutex, NULL))
+		philosophers[i] = (t_philo_data*)malloc(sizeof(t_philo_data) * params[NB_PHILOSOPHERS]);
+		philosophers[i]->id = i + 1;
+		philosophers[i]->number_eats = 0;// How many times it has eaten, 0 at start
+		philosophers[i]->left_fork = &forks[i];
+		philosophers[i]->params = params;
+		philosophers[i]->print_mutex = print_mutex;
+		philosophers[i]->start_of_program = start_of_program;
+		philosophers[i]->should_eat = 0;
+		philosophers[i]->queue = queue;
+		enqueue(queue, philosophers[i]); // some high quality "spaghetti code" right here
+		if (pthread_mutex_init(&philosophers[i]->death_mutex, NULL))
 			return (NULL);
 		if (i == params[NB_PHILOSOPHERS] - 1) // If this is the last philosopher, his right fork should be the 0th fork
-			philosophers[i].right_fork = &forks[0];
+			philosophers[i]->right_fork = &forks[0];
 		else
-			philosophers[i].right_fork = &forks[(i + 1) % params[NB_FORKS]];
+			philosophers[i]->right_fork = &forks[(i + 1) % params[NB_FORKS]];
 		++i;
 	}
-	// order_philos(queue);
+	printf("philo addreses in philosophers_init: \n");
+	for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
+	{
+		printf("[%p]", philosophers[i]);
+	}
+	printf("\n");
+	for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
+	{
+		printf("queue: [%p]", queue->philo_array[i]);
+	}
+	printf("\n");
 	return (philosophers);
 }

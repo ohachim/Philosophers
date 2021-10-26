@@ -7,41 +7,20 @@ Enqueed philo num: 5
 do I get here
 nb_phil_half: 3.
 at beginning of loop Queue->size: 5
-i is 0
-[1]i is 1
-[2]i is 2
-[3]i is 3
-[4]i is 4
-[5] [queue size: 5, queue front: 0, queue rear: 4].
+[1][2][3][4][5] [queue size: 5, queue front: 0, queue rear: 4].
 checked philo->id forks: 1, its forks are ready.
 Before dequeue , queue->size is 5
 dequeed philo num: 0
 after dequeue , queue->size is 4
 at beginning of loop Queue->size: 4
-i is 1
-[2]i is 2
-[3]i is 3
-[4]i is 4
-[5] [queue size: 4, queue front: 1, queue rear: 4].
+[2][3][4][5] [queue size: 4, queue front: 1, queue rear: 4].
 checked philo->id forks: 2, its forks are not ready.
 swapping for next available philo in queue size 4
-before swap: i is 1
-[2]i is 2
-[3]i is 3
-[4]i is 4
-[5] [queue size: 4, queue front: 1, queue rear: 4].
-indexes swapped are: 1 2==> after swap: i is 1
-[3]i is 2
-[2]i is 3
-[4]i is 4
-[5] [queue size: 4, queue front: 1, queue rear: 4].
+before swap: [2][3][4][5] [queue size: 4, queue front: 1, queue rear: 4].
+indexes swapped are: 1 2==> after swap: [3][2][4][5] [queue size: 4, queue front: 1, queue rear: 4].
 checked philo->id forks: 3, its forks are ready.
 at beginning of loop Queue->size: 4
-i is 1
-[3]i is 2
-[2]i is 3
-[4]i is 4
-[5] [queue size: 4, queue front: 1, queue rear: 4].
+[3][2][4][5] [queue size: 4, queue front: 1, queue rear: 4].
 checked philo->id forks: 3, its forks are ready.
 Before dequeue , queue->size is 4
 dequeed philo num: 0
@@ -51,108 +30,220 @@ after dequeue , queue->size is 3
 [0]	3 wating for second fork
 [0]	3 has taken the second fork
 [0]	3 is eating
-[1]	1 wating for first fork
-[1]	1 has taken the first fork
-[1]	1 wating for second fork
-[1]	1 has taken the second fork
-[1]	1 is eating
-[201]	3 has dropped the first fork
-[201]	3 has dropeed the second fork
+[0]	1 wating for first fork
+[0]	1 has taken the first fork
+[0]	1 wating for second fork
+[0]	1 has taken the second fork
+[0]	1 is eating
+[203]	3 has dropped the first fork
+[203]	3 has dropeed the second fork
 Enqueed philo num: 3
-[201]	3 is sleeping
-[201]	1 has dropped the first fork
-[201]	1 has dropeed the second fork
+[203]	3 is sleeping
+[203]	1 has dropped the first fork
+[203]	1 has dropeed the second fork
 Enqueed philo num: 1
-[201]	1 is sleeping
+[203]	1 is sleeping
 at beginning of loop Queue->size: 5
-i is 2
-[2]i is 3
-[4]i is 4
-[5]i is 0
-[3]i is 1
-[1] [queue size: 5, queue front: 2, queue rear: 1].
+[2][4][5][3][1] [queue size: 5, queue front: 2, queue rear: 1].
 checked philo->id forks: 2, its forks are ready.
 Before dequeue , queue->size is 5
 dequeed philo num: 0
 after dequeue , queue->size is 4
 at beginning of loop Queue->size: 4
-i is 3
-[4]i is 4
-[5]i is 0
-[3]i is 1
-[1] [queue size: 4, queue front: 3, queue rear: 1].
+[4][5][3][1] [queue size: 4, queue front: 3, queue rear: 1].
 checked philo->id forks: 4, its forks are ready.
 Before dequeue , queue->size is 4
 dequeed philo num: 0
 after dequeue , queue->size is 3
-[201]	4 wating for first fork
-[201]	4 has taken the first fork
-[201]	4 wating for second fork
-[201]	4 has taken the second fork
-[201]	4 is eating
-[201]	2 wating for first fork
-[201]	2 has taken the first fork
-[201]	2 wating for second fork
-[201]	2 has taken the second fork
-[201]	2 is eating
-[401]	3 is thinking
-[401]	1 is thinking
-[403]	4 has dropped the first fork
-[403]	4 has dropeed the second fork
-Enqueed philo num: 4
-[403]	4 is sleeping
+[203]	2 wating for first fork
+[203]	2 has taken the first fork
+[203]	2 wating for second fork
+[203]	2 has taken the second fork
+[203]	2 is eating
+[203]	4 wating for first fork
+[203]	4 has taken the first fork
+[203]	4 wating for second fork
+[203]	4 has taken the second fork
+[203]	4 is eating
+[403]	3 is thinking
+[403]	1 is thinking
 [403]	2 has dropped the first fork
 [403]	2 has dropeed the second fork
 Enqueed philo num: 2
 [403]	2 is sleeping
+[403]	4 has dropped the first fork
+[403]	4 has dropeed the second fork
+Enqueed philo num: 4
+[403]	4 is sleeping
 at beginning of loop Queue->size: 5
-i is 4
-[5]i is 0
-[3]i is 1
-[1]i is 2
-[4]i is 3
-[2] [queue size: 5, queue front: 4, queue rear: 3].
+[5][3][1][2][4] [queue size: 5, queue front: 4, queue rear: 3].
 checked philo->id forks: 5, its forks are ready.
 Before dequeue , queue->size is 5
 dequeed philo num: 0
 after dequeue , queue->size is 4
 at beginning of loop Queue->size: 4
-i is 0
-[3]i is 1
-[1]i is 2
-[4]i is 3
-[2] [queue size: 4, queue front: 0, queue rear: 3].
+[3][1][2][4] [queue size: 4, queue front: 0, queue rear: 3].
 checked philo->id forks: 3, its forks are ready.
 Before dequeue , queue->size is 4
 dequeed philo num: 0
 after dequeue , queue->size is 3
-[403]	3 wating for first fork
-[403]	3 has taken the first fork
-[403]	3 wating for second fork
-[403]	3 has taken the second fork
-[403]	3 is eating
 [404]	5 wating for first fork
 [404]	5 has taken the first fork
 [404]	5 wating for second fork
 [404]	5 has taken the second fork
 [404]	5 is eating
+[404]	3 wating for first fork
+[404]	3 has taken the first fork
+[404]	3 wating for second fork
+[404]	3 has taken the second fork
+[404]	3 is eating
 [604]	2 is thinking
-[604]	3 has dropped the first fork
-[604]	3 has dropeed the second fork
-Enqueed philo num: 3
-[604]	5 has dropped the first fork
-[604]	5 has dropeed the second fork
-Enqueed philo num: 5
-[604]	3 is sleeping
 [604]	4 is thinking
-[604]	5 is sleeping
+[608]	5 has dropped the first fork
+[608]	5 has dropeed the second fork
+Enqueed philo num: 5
+[608]	5 is sleeping
+[608]	3 has dropped the first fork
+[608]	3 has dropeed the second fork
+Enqueed philo num: 3
+[608]	3 is sleeping
 at beginning of loop Queue->size: 5
-i is 1
-[1]i is 2
-[4]i is 3
-[2]i is 4
-[3]i is 0
-[5] [queue size: 5, queue front: 1, queue rear: 0].
+[1][2][4][5][3] [queue size: 5, queue front: 1, queue rear: 0].
 checked philo->id forks: 1, its forks are ready.
 Before dequeue , queue->size is 5
-dequeed ph
+dequeed philo num: 0
+after dequeue , queue->size is 4
+at beginning of loop Queue->size: 4
+[2][4][5][3] [queue size: 4, queue front: 2, queue rear: 0].
+checked philo->id forks: 2, its forks are not ready.
+swapping for next available philo in queue size 4
+before swap: [2][4][5][3] [queue size: 4, queue front: 2, queue rear: 0].
+indexes swapped are: 2 3==> after swap: [4][2][5][3] [queue size: 4, queue front: 2, queue rear: 0].
+checked philo->id forks: 4, its forks are ready.
+at beginning of loop Queue->size: 4
+[4][2][5][3] [queue size: 4, queue front: 2, queue rear: 0].
+checked philo->id forks: 4, its forks are ready.
+Before dequeue , queue->size is 4
+dequeed philo num: 0
+after dequeue , queue->size is 3
+[608]	1 wating for first fork
+[608]	1 has taken the first fork
+[608]	1 wating for second fork
+[608]	1 has taken the second fork
+[608]	1 is eating
+[608]	4 wating for first fork
+[608]	4 has taken the first fork
+[608]	4 wating for second fork
+[608]	4 has taken the second fork
+[608]	4 is eating
+[809]	5 is thinking
+[809]	3 is thinking
+[809]	1 has dropped the first fork
+[809]	1 has dropeed the second fork
+Enqueed philo num: 1
+[809]	1 is sleeping
+[809]	4 has dropped the first fork
+[809]	4 has dropeed the second fork
+Enqueed philo num: 4
+[809]	4 is sleeping
+at beginning of loop Queue->size: 5
+[2][5][3][1][4] [queue size: 5, queue front: 3, queue rear: 2].
+checked philo->id forks: 2, its forks are ready.
+Before dequeue , queue->size is 5
+dequeed philo num: 0
+after dequeue , queue->size is 4
+at beginning of loop Queue->size: 4
+[5][3][1][4] [queue size: 4, queue front: 4, queue rear: 2].
+checked philo->id forks: 5, its forks are ready.
+Before dequeue , queue->size is 4
+dequeed philo num: 0
+after dequeue , queue->size is 3
+[809]	5 wating for first fork
+[809]	5 has taken the first fork
+[809]	5 wating for second fork
+[809]	5 has taken the second fork
+[809]	5 is eating
+[810]	2 wating for first fork
+[810]	2 has taken the first fork
+[810]	2 wating for second fork
+[810]	2 has taken the second fork
+[810]	2 is eating
+[1010]	5 has dropped the first fork
+[1010]	5 has dropeed the second fork
+Enqueed philo num: 5
+[1010]	5 is sleeping
+[1010]	2 has dropped the first fork
+[1010]	2 has dropeed the second fork
+Enqueed philo num: 2
+[1010]	2 is sleeping
+at beginning of loop Queue->size: 5
+[3][1][4][5][2] [queue size: 5, queue front: 0, queue rear: 4].
+checked philo->id forks: 3, its forks are ready.
+Before dequeue , queue->size is 5
+dequeed philo num: 0
+after dequeue , queue->size is 4
+at beginning of loop Queue->size: 4
+[1][4][5][2] [queue size: 4, queue front: 1, queue rear: 4].
+checked philo->id forks: 1, its forks are ready.
+Before dequeue , queue->size is 4
+dequeed philo num: 0
+after dequeue , queue->size is 3
+[1010]	1 is thinking
+[1010]	1 wating for first fork
+[1010]	1 has taken the first fork
+[1010]	1 wating for second fork
+[1010]	1 has taken the second fork
+[1010]	1 is eating
+[1010]	4 is thinking
+[1010]	3 wating for first fork
+[1010]	3 has taken the first fork
+[1010]	3 wating for second fork
+[1010]	3 has taken the second fork
+[1010]	3 is eating
+[1214]	5 is thinking
+[1214]	1 has dropped the first fork
+[1214]	1 has dropeed the second fork
+Enqueed philo num: 1
+[1214]	1 is sleeping
+at beginning of loop Queue->size: 4
+[4][5][2][1] [queue size: 4, queue front: 2, queue rear: 0].
+checked philo->id forks: 4, its forks are not ready.
+swapping for next available philo in queue size 4
+before swap: [4][5][2][1] [queue size: 4, queue front: 2, queue rear: 0].
+[1214]	3 has dropped the first fork
+[1214]	3 has dropeed the second fork
+Enqueed philo num: 3
+[1214]	2 is thinking
+indexes swapped are: 2 3==> after swap: [5][4][2][1][3] [queue size: 5, queue front: 2, queue rear: 1].
+checked philo->id forks: 5, its forks are ready.
+at beginning of loop Queue->size: 5
+[5][4][2][1][3] [queue size: 5, queue front: 2, queue rear: 1].
+checked philo->id forks: 5, its forks are ready.
+Before dequeue , queue->size is 5
+[1214]	3 is sleeping
+dequeed philo num: 0
+after dequeue , queue->size is 4
+at beginning of loop Queue->size: 4
+[4][2][1][3] [queue size: 4, queue front: 3, queue rear: 1].
+checked philo->id forks: 4, its forks are not ready.
+swapping for next available philo in queue size 4
+before swap: [4][2][1][3] [queue size: 4, queue front: 3, queue rear: 1].
+indexes swapped are: 3 4==> after swap: [2][4][1][3] [queue size: 4, queue front: 3, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+at beginning of loop Queue->size: 4
+[2][4][1][3] [queue size: 4, queue front: 3, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+Before dequeue , queue->size is 4
+dequeed philo num: 0
+after dequeue , queue->size is 3
+[1214]	5 wating for first fork
+[1214]	5 has taken the first fork
+[1214]	5 wating for second fork
+[1214]	5 has taken the second fork
+[1214]	5 is eating
+[1214]	2 wating for first fork
+[1214]	2 has taken the first fork
+[1214]	2 wating for second fork
+[1214]	2 has taken the second fork
+[1214]	2 is eating
+[1409]	 diffrence 801, philo id 4

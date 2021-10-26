@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/16 16:51:37 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/26 17:59:46 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 {
 	int					*params;
 	t_fork				*forks;
-	t_philo_data	*philosophers;
+	t_philo_data		**philosophers;
 	struct timeval		start_of_program;
 	int					errno;
 
@@ -41,16 +41,34 @@ int	main(int argc, char **argv)
 	if (!params)
 		return (error(BAD_ALLOC));
 	init_parameters(argv, params, argc);
+	printf("%d, %d, %d, %d, %d, %d==\n", params[NB_PHILOSOPHERS],
+											params[NB_FORKS],
+											params[NB_EATS],
+											params[TIME_TO_DIE],
+											params[TIME_TO_EAT],
+											params[TIME_TO_SLEEP]);
 	errno = make_forks(params, &forks);
 	if (errno)
 		return (error(errno));
 	philosophers = make_philosophers(params, forks, start_of_program);
+	printf("philo addreses in main: \n");
+	for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
+	{
+		printf("[%p]", philosophers[i]);
+	}
+	printf("\n");
+		for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
+	{
+		printf("queue: [%p]", philosophers[i]->queue->philo_array[i]);
+	}
+	printf("\n");
 	if (!philosophers) // Free the forks
 		return (error(BAD_ALLOC));
 	errno = start(philosophers, params);
-	if (errno)
-		return (error(errno));
-	return (EXIT_SUCCESS);
+	// if (errno)
+	// 	return (error(errno));
+	// return (EXIT_SUCCESS);
+}
 	/*TODO: destroy *forks
 	* free forks
 	* destroy *print_mutex
@@ -58,7 +76,6 @@ int	main(int argc, char **argv)
 	* destroy death mutex
 	* free philosophers
 	*/
-}
 //0x7fde11402c38 0x7fde11402c80
 //0x7fde11402c80 0x7fde11402cc8
 //0x7fde11402cc8 0x7fde11402d10
