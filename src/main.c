@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/26 17:59:46 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/28 10:56:35 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv)
 	printf("\n");
 	if (!philosophers) // Free the forks
 		return (error(BAD_ALLOC));
-	errno = start(philosophers, params);
+	errno = start(philosophers, params); // TODO: CREATE A QUEUE HERE, AND SEND IT TO START
 	// if (errno)
 	// 	return (error(errno));
 	// return (EXIT_SUCCESS);

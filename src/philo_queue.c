@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:40:05 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/26 16:53:28 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/28 12:11:20 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void			swap(int a, int b, t_philo_queue *queue)
 {
 	t_philo_data	*temp;
 
+	if (a == b)
+		return;
 	temp = queue->philo_array[a];
 	queue->philo_array[a] = queue->philo_array[b];
 	queue->philo_array[b] = temp;
@@ -55,6 +57,9 @@ int				enqueue(t_philo_queue* queue, t_philo_data *philo)
 	if (is_full(queue) && printf("this is full my dud\n"))
 		return -1;
 	printf("Enqueed philo num: %d\n", philo->id);
+	philo->left_fork->used = 0;
+	philo->right_fork->used = 0;
+	philo->should_eat = 0;
 	queue->rear = (queue->rear + 1) % queue->capacity;
 	queue->philo_array[queue->rear] = philo;
 	queue->size += 1;
@@ -67,8 +72,8 @@ int		dequeue(t_philo_queue* queue)
 
 	if (is_empty(queue) && printf("this is empty my dud\n"))
 		return (-1);
-	printf("dequeed philo num: %d\n", philo->id);
 	philo = queue->philo_array[queue->front];
+	printf("dequeed philo num: %d\n", philo->id);
 	philo->left_fork->used = 1;
 	philo->right_fork->used = 1;
 	philo->should_eat = 1;

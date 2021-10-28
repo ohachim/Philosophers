@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/26 16:53:31 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/10/26 18:43:46 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char				*my_strdup(char *str); // currently not in use.
 void				philo_think(t_philo_data *philo);
 void				philo_sleep(t_philo_data *philo);
 void				philo_eat(t_philo_data *philo);
-int					start(t_philo_data *philosophers, int *params);
+int					start(t_philo_data **philosophers, int *params);
 void				*routine(void *args);
 void				*watch_philos(void *args);
 t_philo_data		**make_philosophers(int *params, t_fork *forks, struct timeval start_of_program);

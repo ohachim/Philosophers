@@ -1,249 +1,1190 @@
+4, 4, -1, 800, 200000, 200000==
 starting init
+0x7fed5d402b30, the adress of queue
 Enqueed philo num: 1
 Enqueed philo num: 2
 Enqueed philo num: 3
 Enqueed philo num: 4
-Enqueed philo num: 5
-do I get here
-nb_phil_half: 3.
-at beginning of loop Queue->size: 5
-[1][2][3][4][5] [queue size: 5, queue front: 0, queue rear: 4].
+philo addreses in philosophers_init: 
+[0x7fed5d402d50][0x7fed5d402fd0][0x7fed5d403250][0x7fed5d4034d0]
+queue: [0x7fed5d402d50]queue: [0x7fed5d402fd0]queue: [0x7fed5d403250]queue: [0x7fed5d4034d0]
+philo addreses in main: 
+[0x7fed5d402d50][0x7fed5d402fd0][0x7fed5d403250][0x7fed5d4034d0]
+queue: [0x7fed5d402d50]queue: [0x7fed5d402fd0]queue: [0x7fed5d403250]queue: [0x7fed5d4034d0]
+philo addreses in philosophers_init: 
+[0x7fed5d402d50][0x7fed5d402fd0][0x7fed5d403250][0x7fed5d4034d0]
+queue: [0x7fed5d402d50]queue: [0x7fed5d402fd0]queue: [0x7fed5d403250]queue: [0x7fed5d4034d0]
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************
+[1][2][3][4] [queue size: 4, queue front: 0, queue rear: 3].
 checked philo->id forks: 1, its forks are ready.
-Before dequeue , queue->size is 5
-dequeed philo num: 0
-after dequeue , queue->size is 4
-at beginning of loop Queue->size: 4
-[2][3][4][5] [queue size: 4, queue front: 1, queue rear: 4].
+dequeed philo num: 1
 checked philo->id forks: 2, its forks are not ready.
-swapping for next available philo in queue size 4
-before swap: [2][3][4][5] [queue size: 4, queue front: 1, queue rear: 4].
-indexes swapped are: 1 2==> after swap: [3][2][4][5] [queue size: 4, queue front: 1, queue rear: 4].
+before swap: [2][3][4] [queue size: 3, queue front: 1, queue rear: 3].
+indexes swapped are: 1 2==> after swap: [3][2][4] [queue size: 3, queue front: 1, queue rear: 3].
 checked philo->id forks: 3, its forks are ready.
-at beginning of loop Queue->size: 4
-[3][2][4][5] [queue size: 4, queue front: 1, queue rear: 4].
 checked philo->id forks: 3, its forks are ready.
-Before dequeue , queue->size is 4
-dequeed philo num: 0
-after dequeue , queue->size is 3
-[0]	3 wating for first fork
-[0]	3 has taken the first fork
-[0]	3 wating for second fork
-[0]	3 has taken the second fork
-[0]	3 is eating
-[0]	1 wating for first fork
-[0]	1 has taken the first fork
-[0]	1 wating for second fork
-[0]	1 has taken the second fork
-[0]	1 is eating
-[203]	3 has dropped the first fork
-[203]	3 has dropeed the second fork
+dequeed philo num: 3
+ HERE I AM THIS ME: [0x7fed5d402d50][1]
+ HERE I AM THIS ME: [0x7fed5d402fd0][2]
+[1]	3 wating for first fork
+[1]	3 has taken the first fork
+[1]	3 wating for second fork
+[1]	3 has taken the second fork
+[1]	3 is eating
+ HERE I AM THIS ME: [0x7fed5d403250][3]
+ HERE I AM THIS ME: [0x7fed5d4034d0][4]
+[1]	1 wating for first fork
+[1]	1 has taken the first fork
+[1]	1 wating for second fork
+[1]	1 has taken the second fork
+[1]	1 is eating
 Enqueed philo num: 3
-[203]	3 is sleeping
-[203]	1 has dropped the first fork
-[203]	1 has dropeed the second fork
+[201]	3 has dropped the first fork
+[201]	3 has dropped the second fork
+[201]	3 is sleeping
 Enqueed philo num: 1
-[203]	1 is sleeping
-at beginning of loop Queue->size: 5
-[2][4][5][3][1] [queue size: 5, queue front: 2, queue rear: 1].
+[201]	1 has dropped the first fork
+[201]	1 has dropped the second fork
+[201]	1 is sleeping
+[2][4][3][1] [queue size: 4, queue front: 2, queue rear: 1].
 checked philo->id forks: 2, its forks are ready.
-Before dequeue , queue->size is 5
-dequeed philo num: 0
-after dequeue , queue->size is 4
-at beginning of loop Queue->size: 4
-[4][5][3][1] [queue size: 4, queue front: 3, queue rear: 1].
+dequeed philo num: 2
 checked philo->id forks: 4, its forks are ready.
-Before dequeue , queue->size is 4
-dequeed philo num: 0
-after dequeue , queue->size is 3
-[203]	2 wating for first fork
-[203]	2 has taken the first fork
-[203]	2 wating for second fork
-[203]	2 has taken the second fork
-[203]	2 is eating
-[203]	4 wating for first fork
-[203]	4 has taken the first fork
-[203]	4 wating for second fork
-[203]	4 has taken the second fork
-[203]	4 is eating
-[403]	3 is thinking
-[403]	1 is thinking
-[403]	2 has dropped the first fork
-[403]	2 has dropeed the second fork
+dequeed philo num: 4
+[201]	2 wating for first fork
+[201]	2 has taken the first fork
+[201]	2 wating for second fork
+[201]	2 has taken the second fork
+[201]	2 is eating
+[202]	4 wating for first fork
+[202]	4 has taken the first fork
+[202]	4 wating for second fork
+[202]	4 has taken the second fork
+[202]	4 is eating
+[401]	3 is thinking
+[402]	1 is thinking
 Enqueed philo num: 2
-[403]	2 is sleeping
-[403]	4 has dropped the first fork
-[403]	4 has dropeed the second fork
+[402]	2 has dropped the first fork
+[402]	2 has dropped the second fork
+[402]	2 is sleeping
 Enqueed philo num: 4
-[403]	4 is sleeping
-at beginning of loop Queue->size: 5
-[5][3][1][2][4] [queue size: 5, queue front: 4, queue rear: 3].
-checked philo->id forks: 5, its forks are ready.
-Before dequeue , queue->size is 5
-dequeed philo num: 0
-after dequeue , queue->size is 4
-at beginning of loop Queue->size: 4
+[402]	4 has dropped the first fork
+[402]	4 has dropped the second fork
+[402]	4 is sleeping
 [3][1][2][4] [queue size: 4, queue front: 0, queue rear: 3].
 checked philo->id forks: 3, its forks are ready.
-Before dequeue , queue->size is 4
-dequeed philo num: 0
-after dequeue , queue->size is 3
-[404]	5 wating for first fork
-[404]	5 has taken the first fork
-[404]	5 wating for second fork
-[404]	5 has taken the second fork
-[404]	5 is eating
-[404]	3 wating for first fork
-[404]	3 has taken the first fork
-[404]	3 wating for second fork
-[404]	3 has taken the second fork
-[404]	3 is eating
-[604]	2 is thinking
-[604]	4 is thinking
-[608]	5 has dropped the first fork
-[608]	5 has dropeed the second fork
-Enqueed philo num: 5
-[608]	5 is sleeping
-[608]	3 has dropped the first fork
-[608]	3 has dropeed the second fork
-Enqueed philo num: 3
-[608]	3 is sleeping
-at beginning of loop Queue->size: 5
-[1][2][4][5][3] [queue size: 5, queue front: 1, queue rear: 0].
+dequeed philo num: 3
 checked philo->id forks: 1, its forks are ready.
-Before dequeue , queue->size is 5
-dequeed philo num: 0
-after dequeue , queue->size is 4
-at beginning of loop Queue->size: 4
-[2][4][5][3] [queue size: 4, queue front: 2, queue rear: 0].
-checked philo->id forks: 2, its forks are not ready.
-swapping for next available philo in queue size 4
-before swap: [2][4][5][3] [queue size: 4, queue front: 2, queue rear: 0].
-indexes swapped are: 2 3==> after swap: [4][2][5][3] [queue size: 4, queue front: 2, queue rear: 0].
-checked philo->id forks: 4, its forks are ready.
-at beginning of loop Queue->size: 4
-[4][2][5][3] [queue size: 4, queue front: 2, queue rear: 0].
-checked philo->id forks: 4, its forks are ready.
-Before dequeue , queue->size is 4
-dequeed philo num: 0
-after dequeue , queue->size is 3
-[608]	1 wating for first fork
-[608]	1 has taken the first fork
-[608]	1 wating for second fork
-[608]	1 has taken the second fork
-[608]	1 is eating
-[608]	4 wating for first fork
-[608]	4 has taken the first fork
-[608]	4 wating for second fork
-[608]	4 has taken the second fork
-[608]	4 is eating
-[809]	5 is thinking
-[809]	3 is thinking
-[809]	1 has dropped the first fork
-[809]	1 has dropeed the second fork
+dequeed philo num: 1
+[402]	3 wating for first fork
+[402]	3 has taken the first fork
+[402]	3 wating for second fork
+[402]	3 has taken the second fork
+[402]	3 is eating
+[402]	1 wating for first fork
+[402]	1 has taken the first fork
+[402]	1 wating for second fork
+[402]	1 has taken the second fork
+[402]	1 is eating
+[602]	2 is thinking
+[602]	4 is thinking
 Enqueed philo num: 1
-[809]	1 is sleeping
-[809]	4 has dropped the first fork
-[809]	4 has dropeed the second fork
-Enqueed philo num: 4
-[809]	4 is sleeping
-at beginning of loop Queue->size: 5
-[2][5][3][1][4] [queue size: 5, queue front: 3, queue rear: 2].
+[602]	1 has dropped the first fork
+Enqueed philo num: 3
+[602]	1 has dropped the second fork
+[602]	1 is sleeping
+[602]	3 has dropped the first fork
+[602]	3 has dropped the second fork
+[602]	3 is sleeping
+[2][4][1][3] [queue size: 4, queue front: 2, queue rear: 1].
 checked philo->id forks: 2, its forks are ready.
-Before dequeue , queue->size is 5
-dequeed philo num: 0
-after dequeue , queue->size is 4
-at beginning of loop Queue->size: 4
-[5][3][1][4] [queue size: 4, queue front: 4, queue rear: 2].
-checked philo->id forks: 5, its forks are ready.
-Before dequeue , queue->size is 4
-dequeed philo num: 0
-after dequeue , queue->size is 3
-[809]	5 wating for first fork
-[809]	5 has taken the first fork
-[809]	5 wating for second fork
-[809]	5 has taken the second fork
-[809]	5 is eating
-[810]	2 wating for first fork
-[810]	2 has taken the first fork
-[810]	2 wating for second fork
-[810]	2 has taken the second fork
-[810]	2 is eating
-[1010]	5 has dropped the first fork
-[1010]	5 has dropeed the second fork
-Enqueed philo num: 5
-[1010]	5 is sleeping
-[1010]	2 has dropped the first fork
-[1010]	2 has dropeed the second fork
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[603]	2 wating for first fork
+[603]	2 has taken the first fork
+[603]	2 wating for second fork
+[603]	2 has taken the second fork
+[603]	2 is eating
+[603]	4 wating for first fork
+[603]	4 has taken the first fork
+[603]	4 wating for second fork
+[603]	4 has taken the second fork
+[603]	4 is eating
+[803]	3 is thinking
+[803]	1 is thinking
 Enqueed philo num: 2
-[1010]	2 is sleeping
-at beginning of loop Queue->size: 5
-[3][1][4][5][2] [queue size: 5, queue front: 0, queue rear: 4].
-checked philo->id forks: 3, its forks are ready.
-Before dequeue , queue->size is 5
-dequeed philo num: 0
-after dequeue , queue->size is 4
-at beginning of loop Queue->size: 4
-[1][4][5][2] [queue size: 4, queue front: 1, queue rear: 4].
+[805]	2 has dropped the first fork
+[805]	2 has dropped the second fork
+[805]	2 is sleeping
+Enqueed philo num: 4
+[805]	4 has dropped the first fork
+[805]	4 has dropped the second fork
+[805]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
 checked philo->id forks: 1, its forks are ready.
-Before dequeue , queue->size is 4
-dequeed philo num: 0
-after dequeue , queue->size is 3
-[1010]	1 is thinking
-[1010]	1 wating for first fork
-[1010]	1 has taken the first fork
-[1010]	1 wating for second fork
-[1010]	1 has taken the second fork
-[1010]	1 is eating
-[1010]	4 is thinking
-[1010]	3 wating for first fork
-[1010]	3 has taken the first fork
-[1010]	3 wating for second fork
-[1010]	3 has taken the second fork
-[1010]	3 is eating
-[1214]	5 is thinking
-[1214]	1 has dropped the first fork
-[1214]	1 has dropeed the second fork
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[805]	3 wating for first fork
+[805]	3 has taken the first fork
+[805]	3 wating for second fork
+[805]	3 has taken the second fork
+[805]	3 is eating
+[805]	1 wating for first fork
+[805]	1 has taken the first fork
+[805]	1 wating for second fork
+[805]	1 has taken the second fork
+[805]	1 is eating
+[1005]	2 is thinking
+[1005]	4 is thinking
 Enqueed philo num: 1
-[1214]	1 is sleeping
-at beginning of loop Queue->size: 4
-[4][5][2][1] [queue size: 4, queue front: 2, queue rear: 0].
-checked philo->id forks: 4, its forks are not ready.
-swapping for next available philo in queue size 4
-before swap: [4][5][2][1] [queue size: 4, queue front: 2, queue rear: 0].
-[1214]	3 has dropped the first fork
-[1214]	3 has dropeed the second fork
+[1005]	1 has dropped the first fork
+[1005]	1 has dropped the second fork
+[1005]	1 is sleeping
 Enqueed philo num: 3
-[1214]	2 is thinking
-indexes swapped are: 2 3==> after swap: [5][4][2][1][3] [queue size: 5, queue front: 2, queue rear: 1].
-checked philo->id forks: 5, its forks are ready.
-at beginning of loop Queue->size: 5
-[5][4][2][1][3] [queue size: 5, queue front: 2, queue rear: 1].
-checked philo->id forks: 5, its forks are ready.
-Before dequeue , queue->size is 5
-[1214]	3 is sleeping
-dequeed philo num: 0
-after dequeue , queue->size is 4
-at beginning of loop Queue->size: 4
-[4][2][1][3] [queue size: 4, queue front: 3, queue rear: 1].
-checked philo->id forks: 4, its forks are not ready.
-swapping for next available philo in queue size 4
-before swap: [4][2][1][3] [queue size: 4, queue front: 3, queue rear: 1].
-indexes swapped are: 3 4==> after swap: [2][4][1][3] [queue size: 4, queue front: 3, queue rear: 1].
+[1005]	3 has dropped the first fork
+[1005]	3 has dropped the second fork
+[1005]	3 is sleeping
+[2][4][1][3] [queue size: 4, queue front: 2, queue rear: 1].
 checked philo->id forks: 2, its forks are ready.
-at beginning of loop Queue->size: 4
-[2][4][1][3] [queue size: 4, queue front: 3, queue rear: 1].
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[1006]	2 wating for first fork
+[1006]	2 has taken the first fork
+[1006]	2 wating for second fork
+[1006]	2 has taken the second fork
+[1006]	2 is eating
+[1006]	4 wating for first fork
+[1006]	4 has taken the first fork
+[1006]	4 wating for second fork
+[1006]	4 has taken the second fork
+[1006]	4 is eating
+[1205]	1 is thinking
+[1206]	3 is thinking
+Enqueed philo num: 2
+[1206]	2 has dropped the first fork
+[1206]	2 has dropped the second fork
+[1206]	2 is sleeping
+Enqueed philo num: 4
+[1206]	4 has dropped the first fork
+[1206]	4 has dropped the second fork
+[1206]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[1206]	3 wating for first fork
+[1206]	3 has taken the first fork
+[1206]	3 wating for second fork
+[1206]	3 has taken the second fork
+[1206]	3 is eating
+[1207]	1 wating for first fork
+[1207]	1 has taken the first fork
+[1207]	1 wating for second fork
+[1207]	1 has taken the second fork
+[1207]	1 is eating
+[1406]	2 is thinking
+[1406]	4 is thinking
+Enqueed philo num: 3
+[1407]	3 has dropped the first fork
+[1407]	3 has dropped the second fork
+[1407]	3 is sleeping
+Enqueed philo num: 1
+[1408]	1 has dropped the first fork
+[1408]	1 has dropped the second fork
+[1408]	1 is sleeping
+[2][4][3][1] [queue size: 4, queue front: 2, queue rear: 1].
 checked philo->id forks: 2, its forks are ready.
-Before dequeue , queue->size is 4
-dequeed philo num: 0
-after dequeue , queue->size is 3
-[1214]	5 wating for first fork
-[1214]	5 has taken the first fork
-[1214]	5 wating for second fork
-[1214]	5 has taken the second fork
-[1214]	5 is eating
-[1214]	2 wating for first fork
-[1214]	2 has taken the first fork
-[1214]	2 wating for second fork
-[1214]	2 has taken the second fork
-[1214]	2 is eating
-[1409]	 diffrence 801, philo id 4
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[1408]	2 wating for first fork
+[1408]	2 has taken the first fork
+[1408]	2 wating for second fork
+[1408]	2 has taken the second fork
+[1408]	2 is eating
+[1408]	4 wating for first fork
+[1408]	4 has taken the first fork
+[1408]	4 wating for second fork
+[1408]	4 has taken the second fork
+[1408]	4 is eating
+[1607]	3 is thinking
+[1608]	1 is thinking
+Enqueed philo num: 2
+[1608]	2 has dropped the first fork
+[1608]	2 has dropped the second fork
+[1608]	2 is sleeping
+Enqueed philo num: 4
+[1608]	4 has dropped the first fork
+[1608]	4 has dropped the second fork
+[1608]	4 is sleeping
+[3][1][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[1608]	1 wating for first fork
+[1608]	1 has taken the first fork
+[1608]	1 wating for second fork
+[1608]	1 has taken the second fork
+[1608]	1 is eating
+[1609]	3 wating for first fork
+[1609]	3 has taken the first fork
+[1609]	3 wating for second fork
+[1609]	3 has taken the second fork
+[1609]	3 is eating
+[1809]	2 is thinking
+Enqueed philo num: 1
+[1809]	1 has dropped the first fork
+[1809]	1 has dropped the second fork
+[1809]	1 is sleeping
+Enqueed philo num: 3
+[1809]	3 has dropped the first fork
+[1809]	3 has dropped the second fork
+[1809]	3 is sleeping
+[1809]	4 is thinking
+[2][4][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[1809]	2 wating for first fork
+[1809]	2 has taken the first fork
+[1809]	2 wating for second fork
+[1809]	2 has taken the second fork
+[1809]	2 is eating
+[1809]	4 wating for first fork
+[1809]	4 has taken the first fork
+[1809]	4 wating for second fork
+[1809]	4 has taken the second fork
+[1809]	4 is eating
+[2009]	3 is thinking
+Enqueed philo num: 2
+[2009]	2 has dropped the first fork
+[2009]	2 has dropped the second fork
+[2009]	2 is sleeping
+[2009]	1 is thinking
+Enqueed philo num: 4
+[2009]	4 has dropped the first fork
+[2009]	4 has dropped the second fork
+[2009]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[2009]	3 wating for first fork
+[2009]	3 has taken the first fork
+[2009]	3 wating for second fork
+[2009]	3 has taken the second fork
+[2009]	3 is eating
+[2009]	1 wating for first fork
+[2009]	1 has taken the first fork
+[2009]	1 wating for second fork
+[2009]	1 has taken the second fork
+[2009]	1 is eating
+[2209]	2 is thinking
+[2209]	4 is thinking
+Enqueed philo num: 3
+[2209]	3 has dropped the first fork
+[2209]	Enqueed philo num: 1
+3 has dropped the second fork
+[2209]	3 is sleeping
+[2209]	1 has dropped the first fork
+[2209]	1 has dropped the second fork
+[2209]	1 is sleeping
+[2][4][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[2210]	2 wating for first fork
+[2210]	2 has taken the first fork
+[2210]	2 wating for second fork
+[2210]	2 has taken the second fork
+[2210]	2 is eating
+[2210]	4 wating for first fork
+[2210]	4 has taken the first fork
+[2210]	4 wating for second fork
+[2210]	4 has taken the second fork
+[2210]	4 is eating
+[2410]	1 is thinking
+Enqueed philo num: 4
+[2410]	4 has dropped the first fork
+[2410]	4 has dropped the second fork
+[2410]	4 is sleeping
+Enqueed philo num: 2
+[2410]	2 has dropped the first fork
+[2410]	2 has dropped the second fork
+[2410]	2 is sleeping
+[3][1][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[2410]	1 wating for first fork
+[2410]	1 has taken the first fork
+[2410]	1 wating for second fork
+[2410]	1 has taken the second fork
+[2410]	1 is eating
+[2414]	3 is thinking
+[2414]	3 wating for first fork
+[2414]	3 has taken the first fork
+[2414]	3 wating for second fork
+[2414]	3 has taken the second fork
+[2414]	3 is eating
+[2610]	4 is thinking
+[2610]	2 is thinking
+Enqueed philo num: 1
+[2611]	1 has dropped the first fork
+[2611]	1 has dropped the second fork
+[2611]	1 is sleeping
+Enqueed philo num: 3
+[2615]	3 has dropped the first fork
+[2615]	3 has dropped the second fork
+[2615]	3 is sleeping
+[4][2][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[2615]	4 wating for first fork
+[2615]	4 has taken the first fork
+[2615]	4 wating for second fork
+[2615]	4 has taken the second fork
+[2615]	4 is eating
+[2615]	2 wating for first fork
+[2615]	2 has taken the first fork
+[2615]	2 wating for second fork
+[2615]	2 has taken the second fork
+[2615]	2 is eating
+[2811]	1 is thinking
+[2815]	3 is thinking
+Enqueed philo num: 2
+[2815]	2 has dropped the first fork
+[2815]	2 has dropped the second fork
+[2815]	2 is sleeping
+Enqueed philo num: 4
+[2815]	4 has dropped the first fork
+[2815]	4 has dropped the second fork
+[2815]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[2816]	1 wating for first fork
+[2816]	1 has taken the first fork
+[2816]	1 wating for second fork
+[2816]	1 has taken the second fork
+[2816]	1 is eating
+[2816]	3 wating for first fork
+[2816]	3 has taken the first fork
+[2816]	3 wating for second fork
+[2816]	3 has taken the second fork
+[2816]	3 is eating
+[3016]	2 is thinking
+[3016]	4 is thinking
+Enqueed philo num: 1
+[3016]	1 has dropped the first fork
+[3016]	1 has dropped the second fork
+[3016]	1 is sleeping
+Enqueed philo num: 3
+[3016]	3 has dropped the first fork
+[3016]	3 has dropped the second fork
+[3016]	3 is sleeping
+[2][4][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[3017]	2 wating for first fork
+[3017]	2 has taken the first fork
+[3017]	2 wating for second fork
+[3017]	2 has taken the second fork
+[3017]	2 is eating
+[3017]	4 wating for first fork
+[3017]	4 has taken the first fork
+[3017]	4 wating for second fork
+[3017]	4 has taken the second fork
+[3017]	4 is eating
+[3217]	1 is thinking
+[3217]	3 is thinking
+Enqueed philo num: 2
+[3217]	2 has dropped the first fork
+[3217]	2 has dropped the second fork
+[3217]	2 is sleeping
+Enqueed philo num: 4
+[3217]	4 has dropped the first fork
+[3217]	4 has dropped the second fork
+[3217]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[3217]	1 wating for first fork
+[3217]	1 has taken the first fork
+[3217]	1 wating for second fork
+[3217]	1 has taken the second fork
+[3217]	1 is eating
+[3217]	3 wating for first fork
+[3217]	3 has taken the first fork
+[3217]	3 wating for second fork
+[3217]	3 has taken the second fork
+[3217]	3 is eating
+[3417]	2 is thinking
+[3417]	4 is thinking
+Enqueed philo num: 1
+[3418]	1 has dropped the first fork
+[3418]	1 has dropped the second fork
+[3418]	1 is sleeping
+Enqueed philo num: 3
+[3418]	3 has dropped the first fork
+[3418]	3 has dropped the second fork
+[3418]	3 is sleeping
+[2][4][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[3418]	4 wating for first fork
+[3418]	4 has taken the first fork
+[3418]	4 wating for second fork
+[3418]	4 has taken the second fork
+[3418]	4 is eating
+[3418]	2 wating for first fork
+[3418]	2 has taken the first fork
+[3418]	2 wating for second fork
+[3418]	2 has taken the second fork
+[3418]	2 is eating
+[3618]	3 is thinking
+Enqueed philo num: 4
+[3618]	4 has dropped the first fork
+[3618]	4 has dropped the second fork
+[3618]	4 is sleeping
+[3618]	1 is thinking
+Enqueed philo num: 2
+[3618]	2 has dropped the first fork
+[3618]	2 has dropped the second fork
+[3618]	2 is sleeping
+[1][3][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[3618]	3 wating for first fork
+[3618]	3 has taken the first fork
+[3618]	3 wating for second fork
+[3618]	3 has taken the second fork
+[3618]	3 is eating
+[3618]	1 wating for first fork
+[3618]	1 has taken the first fork
+[3618]	1 wating for second fork
+[3618]	1 has taken the second fork
+[3618]	1 is eating
+[3818]	4 is thinking
+[3818]	2 is thinking
+Enqueed philo num: 3
+[3819]	3 has dropped the first fork
+[3819]	3 has dropped the second fork
+[3819]	3 is sleeping
+Enqueed philo num: 1
+[3819]	1 has dropped the first fork
+[3819]	1 has dropped the second fork
+[3819]	1 is sleeping
+[4][2][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[3819]	2 wating for first fork
+[3819]	2 has taken the first fork
+[3819]	2 wating for second fork
+[3819]	2 has taken the second fork
+[3819]	2 is eating
+[3819]	4 wating for first fork
+[3819]	4 has taken the first fork
+[3819]	4 wating for second fork
+[3819]	4 has taken the second fork
+[3819]	4 is eating
+[4019]	3 is thinking
+[4019]	1 is thinking
+Enqueed philo num: 2
+[4019]	2 has dropped the first fork
+[4019]	2 has dropped the second fork
+[4019]	2 is sleeping
+Enqueed philo num: 4
+[4021]	4 has dropped the first fork
+[4021]	4 has dropped the second fork
+[4021]	4 is sleeping
+[3][1][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[4022]	1 wating for first fork
+[4022]	1 has taken the first fork
+[4022]	1 wating for second fork
+[4022]	1 has taken the second fork
+[4022]	1 is eating
+[4022]	3 wating for first fork
+[4022]	3 has taken the first fork
+[4022]	3 wating for second fork
+[4022]	3 has taken the second fork
+[4022]	3 is eating
+[4219]	2 is thinking
+[4221]	4 is thinking
+Enqueed philo num: 1
+[4222]	1 has dropped the first fork
+[4222]	1 has dropped the second fork
+[4222]	1 is sleeping
+Enqueed philo num: 3
+[4222]	3 has dropped the first fork
+[2][4][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[4222]	3 has dropped the second fork
+[4222]	3 is sleeping
+[4222]	4 wating for first fork
+[4223]	4 has taken the first fork
+[4223]	4 wating for second fork
+[4223]	4 has taken the second fork
+[4223]	4 is eating
+[4223]	2 wating for first fork
+[4223]	2 has taken the first fork
+[4223]	2 wating for second fork
+[4223]	2 has taken the second fork
+[4223]	2 is eating
+[4422]	1 is thinking
+[4422]	3 is thinking
+Enqueed philo num: 4
+[4423]	4 has dropped the first fork
+[4423]	4 has dropped the second fork
+[4423]	4 is sleeping
+Enqueed philo num: 2
+[4423]	2 has dropped the first fork
+[4423]	2 has dropped the second fork
+[4423]	2 is sleeping
+[1][3][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[4423]	1 wating for first fork
+[4423]	1 has taken the first fork
+[4423]	1 wating for second fork
+[4423]	1 has taken the second fork
+[4423]	1 is eating
+[4423]	3 wating for first fork
+[4423]	3 has taken the first fork
+[4423]	3 wating for second fork
+[4423]	3 has taken the second fork
+[4423]	3 is eating
+[4623]	4 is thinking
+[4623]	2 is thinking
+Enqueed philo num: 3
+[4623]	3 has dropped the first fork
+[4623]	3 has dropped the second fork
+[4623]	3 is sleeping
+Enqueed philo num: 1
+[4623]	1 has dropped the first fork
+[4623]	1 has dropped the second fork
+[4623]	1 is sleeping
+[4][2][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[4623]	4 wating for first fork
+[4623]	4 has taken the first fork
+[4623]	4 wating for second fork
+[4623]	4 has taken the second fork
+[4623]	4 is eating
+[4623]	2 wating for first fork
+[4623]	2 has taken the first fork
+[4623]	2 wating for second fork
+[4623]	2 has taken the second fork
+[4623]	2 is eating
+[4823]	3 is thinking
+[4823]	1 is thinking
+Enqueed philo num: 4
+[4824]	4 has dropped the first fork
+[4824]	4 has dropped the second fork
+[4824]	4 is sleeping
+Enqueed philo num: 2
+[4824]	2 has dropped the first fork
+[4824]	2 has dropped the second fork
+[4824]	2 is sleeping
+[3][1][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[4824]	3 wating for first fork
+[4824]	3 has taken the first fork
+[4824]	3 wating for second fork
+[4824]	3 has taken the second fork
+[4824]	3 is eating
+[4824]	1 wating for first fork
+[4824]	1 has taken the first fork
+[4824]	1 wating for second fork
+[4824]	1 has taken the second fork
+[4824]	1 is eating
+[5024]	4 is thinking
+[5024]	2 is thinking
+Enqueed philo num: 3
+[5024]	3 has dropped the first fork
+[5024]	3 has dropped the second fork
+[5024]	Enqueed philo num: 1
+3 is sleeping
+[5024]	1 has dropped the first fork
+[5024]	1 has dropped the second fork
+[5024]	1 is sleeping
+[4][2][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[5025]	4 wating for first fork
+[5025]	4 has taken the first fork
+[5025]	4 wating for second fork
+[5025]	4 has taken the second fork
+[5025]	4 is eating
+[5025]	2 wating for first fork
+[5025]	2 has taken the first fork
+[5025]	2 wating for second fork
+[5025]	2 has taken the second fork
+[5025]	2 is eating
+[5224]	3 is thinking
+[5225]	1 is thinking
+Enqueed philo num: 4
+[5225]	4 has dropped the first fork
+[5225]	4 has dropped the second fork
+[5225]	4 is sleeping
+Enqueed philo num: 2
+[5225]	2 has dropped the first fork
+[5225]	2 has dropped the second fork
+[5225]	2 is sleeping
+[3][1][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[5225]	1 wating for first fork
+[5225]	1 has taken the first fork
+[5225]	1 wating for second fork
+[5225]	1 has taken the second fork
+[5225]	1 is eating
+[5225]	3 wating for first fork
+[5225]	3 has taken the first fork
+[5225]	3 wating for second fork
+[5225]	3 has taken the second fork
+[5225]	3 is eating
+[5425]	4 is thinking
+[5425]	2 is thinking
+Enqueed philo num: 1
+[5425]	1 has dropped the first fork
+[5425]	1 has dropped the second fork
+[5425]	1 is sleeping
+Enqueed philo num: 3
+[5425]	3 has dropped the first fork
+[5425]	3 has dropped the second fork
+[5425]	3 is sleeping
+[4][2][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[5426]	4 wating for first fork
+[5426]	4 has taken the first fork
+[5426]	4 wating for second fork
+[5426]	4 has taken the second fork
+[5426]	4 is eating
+[5426]	2 wating for first fork
+[5426]	2 has taken the first fork
+[5426]	2 wating for second fork
+[5426]	2 has taken the second fork
+[5426]	2 is eating
+[5625]	1 is thinking
+[5625]	3 is thinking
+Enqueed philo num: 4
+[5626]	4 has dropped the first fork
+[5626]	4 has dropped the second fork
+[5626]	4 is sleeping
+Enqueed philo num: 2
+[5626]	2 has dropped the first fork
+[5626]	2 has dropped the second fork
+[5626]	2 is sleeping
+[1][3][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[5626]	1 wating for first fork
+[5626]	1 has taken the first fork
+[5626]	1 wating for second fork
+[5626]	1 has taken the second fork
+[5626]	1 is eating
+[5626]	3 wating for first fork
+[5626]	3 has taken the first fork
+[5626]	3 wating for second fork
+[5626]	3 has taken the second fork
+[5626]	3 is eating
+[5826]	2 is thinking
+[5826]	4 is thinking
+Enqueed philo num: 3
+Enqueed philo num: 1
+[5827]	3 has dropped the first fork
+[5827]	3 has dropped the second fork
+[5827]	3 is sleeping
+[5827]	1 has dropped the first fork
+[5827]	1 has dropped the second fork
+[5827]	1 is sleeping
+[4][2][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[5827]	4 wating for first fork
+[5827]	4 has taken the first fork
+[5827]	4 wating for second fork
+[5827]	4 has taken the second fork
+[5827]	4 is eating
+[5827]	2 wating for first fork
+[5827]	2 has taken the first fork
+[5827]	2 wating for second fork
+[5827]	2 has taken the second fork
+[5827]	2 is eating
+[6027]	3 is thinking
+[6027]	1 is thinking
+Enqueed philo num: 4
+[6027]	4 has dropped the first fork
+[6027]	4 has dropped the second fork
+[6027]	4 is sleeping
+Enqueed philo num: 2
+[6028]	2 has dropped the first fork
+[6028]	2 has dropped the second fork
+[6028]	2 is sleeping
+[3][1][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[6028]	1 wating for first fork
+[6028]	1 has taken the first fork
+[6028]	1 wating for second fork
+[6028]	1 has taken the second fork
+[6028]	1 is eating
+[6028]	3 wating for first fork
+[6028]	3 has taken the first fork
+[6028]	3 wating for second fork
+[6028]	3 has taken the second fork
+[6028]	3 is eating
+[6227]	4 is thinking
+[6228]	2 is thinking
+Enqueed philo num: 1
+[6229]	1 has dropped the first fork
+[6229]	1 has dropped the second fork
+[6229]	1 is sleeping
+Enqueed philo num: 3
+[6229]	3 has dropped the first fork
+[6229]	3 has dropped the second fork
+[6229]	3 is sleeping
+[4][2][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[6229]	4 wating for first fork
+[6229]	4 has taken the first fork
+[6229]	4 wating for second fork
+[6229]	4 has taken the second fork
+[6229]	4 is eating
+[6229]	2 wating for first fork
+[6229]	2 has taken the first fork
+[6229]	2 wating for second fork
+[6229]	2 has taken the second fork
+[6229]	2 is eating
+[6429]	1 is thinking
+Enqueed philo num: 4
+[6429]	4 has dropped the first fork
+[6429]	4 has dropped the second fork
+[6429]	4 is sleeping
+Enqueed philo num: 2
+[6429]	2 has dropped the first fork
+[6429]	2 has dropped the second fork
+[6429]	2 is sleeping
+[1][3][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[6429]	1 wating for first fork
+[6429]	1 has taken the first fork
+[6429]	1 wating for second fork
+[6429]	1 has taken the second fork
+[6429]	1 is eating
+[6429]	3 is thinking
+[6429]	3 wating for first fork
+[6429]	3 has taken the first fork
+[6429]	3 wating for second fork
+[6429]	3 has taken the second fork
+[6429]	3 is eating
+Enqueed philo num: 3
+[6630]	3 has dropped the first fork
+[6630]	3 has dropped the second fork
+[6630]	3 is sleeping
+[6631]	4 is thinking
+[6631]	2 is thinking
+Enqueed philo num: 1
+[6631]	1 has dropped the first fork
+[6631]	1 has dropped the second fork
+[6631]	1 is sleeping
+[4][2][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[6631]	4 wating for first fork
+[6631]	4 has taken the first fork
+[6631]	4 wating for second fork
+[6631]	4 has taken the second fork
+[6631]	4 is eating
+[6631]	2 wating for first fork
+[6631]	2 has taken the first fork
+[6631]	2 wating for second fork
+[6631]	2 has taken the second fork
+[6631]	2 is eating
+[6830]	3 is thinking
+[6831]	1 is thinking
+Enqueed philo num: 4
+[6831]	4 has dropped the first fork
+[6831]	4 has dropped the second fork
+[6831]	4 is sleeping
+Enqueed philo num: 2
+[6832]	2 has dropped the first fork
+[6832]	2 has dropped the second fork
+[6832]	2 is sleeping
+[3][1][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[6832]	1 wating for first fork
+[6832]	1 has taken the first fork
+[6832]	1 wating for second fork
+[6832]	1 has taken the second fork
+[6832]	1 is eating
+[6832]	3 wating for first fork
+[6832]	3 has taken the first fork
+[6832]	3 wating for second fork
+[6832]	3 has taken the second fork
+[6832]	3 is eating
+[7031]	4 is thinking
+[7032]	2 is thinking
+Enqueed philo num: 1
+[7032]	1 has dropped the first fork
+[7032]	1 has dropped the second fork
+[7032]	1 is sleeping
+Enqueed philo num: 3
+[7032]	3 has dropped the first fork
+[7032]	3 has dropped the second fork
+[7032]	3 is sleeping
+[4][2][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[7033]	4 wating for first fork
+[7033]	4 has taken the first fork
+[7033]	4 wating for second fork
+[7033]	4 has taken the second fork
+[7033]	4 is eating
+[7033]	2 wating for first fork
+[7033]	2 has taken the first fork
+[7033]	2 wating for second fork
+[7033]	2 has taken the second fork
+[7033]	2 is eating
+[7232]	1 is thinking
+[7233]	3 is thinking
+Enqueed philo num: 2
+[7233]	2 has dropped the first fork
+[7233]	2 has dropped the second fork
+[7233]	2 is sleeping
+Enqueed philo num: 4
+[7233]	4 has dropped the first fork
+[7233]	4 has dropped the second fork
+[7233]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[7233]	1 wating for first fork
+[7233]	1 has taken the first fork
+[7233]	1 wating for second fork
+[7233]	1 has taken the second fork
+[7233]	1 is eating
+[7233]	3 wating for first fork
+[7233]	3 has taken the first fork
+[7233]	3 wating for second fork
+[7233]	3 has taken the second fork
+[7233]	3 is eating
+[7438]	2 is thinking
+[7438]	4 is thinking
+Enqueed philo num: 1
+[7438]	1 has dropped the first fork
+[7438]	1 has dropped the second fork
+[7438]	1 is sleeping
+Enqueed philo num: 3
+[7438]	3 has dropped the first fork
+[7438]	3 has dropped the second fork
+[7438]	3 is sleeping
+[2][4][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[7438]	2 wating for first fork
+[7438]	2 has taken the first fork
+[7438]	2 wating for second fork
+[7438]	2 has taken the second fork
+[7438]	2 is eating
+[7438]	4 wating for first fork
+[7438]	4 has taken the first fork
+[7438]	4 wating for second fork
+[7438]	4 has taken the second fork
+[7438]	4 is eating
+[7638]	1 is thinking
+[7639]	3 is thinking
+Enqueed philo num: 2
+[7639]	2 has dropped the first fork
+[7639]	2 has dropped the second fork
+[7639]	2 is sleeping
+Enqueed philo num: 4
+[7639]	4 has dropped the first fork
+[7639]	4 has dropped the second fork
+[7639]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[7639]	1 wating for first fork
+[7639]	1 has taken the first fork
+[7639]	1 wating for second fork
+[7639]	1 has taken the second fork
+[7639]	1 is eating
+[7639]	3 wating for first fork
+[7639]	3 has taken the first fork
+[7639]	3 wating for second fork
+[7639]	3 has taken the second fork
+[7639]	3 is eating
+[7839]	2 is thinking
+[7839]	4 is thinking
+Enqueed philo num: 3
+[7839]	3 has dropped the first fork
+[7839]	3 has dropped the second fork
+Enqueed philo num: 1
+[7839]	3 is sleeping
+[7839]	1 has dropped the first fork
+[7839]	1 has dropped the second fork
+[7839]	1 is sleeping
+[2][4][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[7839]	4 wating for first fork
+[7839]	4 has taken the first fork
+[7839]	4 wating for second fork
+[7839]	4 has taken the second fork
+[7839]	4 is eating
+[7840]	2 wating for first fork
+[7840]	2 has taken the first fork
+[7840]	2 wating for second fork
+[7840]	2 has taken the second fork
+[7840]	2 is eating
+[8039]	3 is thinking
+[8039]	1 is thinking
+Enqueed philo num: 4
+[8040]	4 has dropped the first fork
+[8040]	4 has dropped the second fork
+[8040]	4 is sleeping
+Enqueed philo num: 2
+[8040]	2 has dropped the first fork
+[8040]	2 has dropped the second fork
+[8040]	2 is sleeping
+[3][1][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[8041]	1 wating for first fork
+[8041]	1 has taken the first fork
+[8041]	1 wating for second fork
+[8041]	1 has taken the second fork
+[8041]	1 is eating
+[8041]	3 wating for first fork
+[8041]	3 has taken the first fork
+[8041]	3 wating for second fork
+[8041]	3 has taken the second fork
+[8041]	3 is eating
+[8240]	4 is thinking
+[8240]	2 is thinking
+Enqueed philo num: 1
+[8241]	1 has dropped the first fork
+[8241]	1 has dropped the second fork
+[8241]	1 is sleeping
+Enqueed philo num: 3
+[8242]	3 has dropped the first fork
+[8242]	3 has dropped the second fork
+[8242]	3 is sleeping
+[4][2][1][3] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+[8243]	2 wating for first fork
+[8243]	2 has taken the first fork
+[8243]	2 wating for second fork
+[8243]	2 has taken the second fork
+[8243]	2 is eating
+[8243]	4 wating for first fork
+[8243]	4 has taken the first fork
+[8243]	4 wating for second fork
+[8243]	4 has taken the second fork
+[8243]	4 is eating
+[8441]	1 is thinking
+[8447]	3 is thinking
+Enqueed philo num: 2
+[8447]	2 has dropped the first fork
+[8447]	2 has dropped the second fork
+[8447]	2 is sleeping
+Enqueed philo num: 4
+[8448]	4 has dropped the first fork
+[8448]	4 has dropped the second fork
+[8448]	4 is sleeping
+[1][3][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+[8448]	3 wating for first fork
+[8448]	3 has taken the first fork
+[8448]	3 wating for second fork
+[8448]	3 has taken the second fork
+[8448]	3 is eating
+[8448]	1 wating for first fork
+[8448]	1 has taken the first fork
+[8448]	1 wating for second fork
+[8448]	1 has taken the second fork
+[8448]	1 is eating
+[8648]	2 is thinking
+[8648]	4 is thinking
+Enqueed philo num: 3
+[8648]	3 has dropped the first fork
+[8648]	3 has dropped the second fork
+[8648]	3 is sleeping
+Enqueed philo num: 1
+[8648]	1 has dropped the first fork
+[8648]	1 has dropped the second fork
+[8648]	1 is sleeping
+[2][4][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[8649]	2 wating for first fork
+[8649]	2 has taken the first fork
+[8649]	2 wating for second fork
+[8649]	2 has taken the second fork
+[8649]	2 is eating
+[8649]	4 wating for first fork
+[8649]	4 has taken the first fork
+[8649]	4 wating for second fork
+[8649]	4 has taken the second fork
+[8649]	4 is eating
+[8849]	3 is thinking
+[8849]	1 is thinking
+Enqueed philo num: 2
+[8849]	2 has dropped the first fork
+[8849]	2 has dropped the second fork
+[8849]	2 is sleeping
+Enqueed philo num: 4
+[8849]	4 has dropped the first fork
+[8849]	4 has dropped the second fork
+[8849]	4 is sleeping
+[3][1][2][4] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id forks: 3, its forks are ready.
+dequeed philo num: 3
+checked philo->id forks: 1, its forks are ready.
+dequeed philo num: 1
+[8849]	1 wating for first fork
+[8849]	1 has taken the first fork
+[8849]	1 wating for second fork
+[8849]	1 has taken the second fork
+[8849]	1 is eating
+[8849]	3 wating for first fork
+[8849]	3 has taken the first fork
+[8849]	3 wating for second fork
+[8849]	3 has taken the second fork
+[8849]	3 is eating
+[9049]	4 is thinking
+Enqueed philo num: 3
+[9050]	3 has dropped the first fork
+[9050]	3 has dropped the second fork
+[9050]	3 is sleeping
+[9054]	2 is thinking
+Enqueed philo num: 1
+[9054]	1 has dropped the first fork
+[9054]	1 has dropped the second fork
+[9054]	1 is sleeping
+[2][4][3][1] [queue size: 4, queue front: 2, queue rear: 1].
+checked philo->id forks: 2, its forks are ready.
+dequeed philo num: 2
+checked philo->id forks: 4, its forks are ready.
+dequeed philo num: 4
+[9055]	4 wating for first fork
+[9055]	4 has taken the first fork
+[9055]	4 wating for second fork
+[9055]	4 has taken the second fork
+[9055]	4 is eating
+[9055]	2 wating for first fork
+[9055]	2 has taken the first fork
+[9055]	2 wating for second fork
+[9055]	2 has taken the second fork
+[9055]	2 is eating
+[9250]	3 is thinking
+[9256]	1 is thinking
+Enqueed philo num: 4
+[9256]	4 has dropped the first fork
+[9256]	4 has dropped the second fork
+[9256]	4 is sleeping
+Enqueed philo num: 2
+[9256]	2 has dropped the first fork
+[9256]	2 has dropped the second fork
+[9256]	2 is sleeping
+[3][1][4][2] [queue size: 4, queue front: 0, queue rear: 3].
+checked philo->id fork
+1 2 3 4 5
+
+1 2 3 4
