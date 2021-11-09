@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/26 18:43:46 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/08 20:51:07 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,6 @@ int					is_empty(t_philo_queue *queue);
 t_philo_data		*front(t_philo_queue *queue);
 t_philo_data		*rear(t_philo_queue* queue);
 void				swap(int a, int b, t_philo_queue *queue);
+void				print_time_stamp( struct timeval start_of_program);
+unsigned int  		get_milliseconds(unsigned int seconds, unsigned int microseconds);
 #endif

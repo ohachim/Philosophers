@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/28 10:56:35 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/08 20:40:53 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,6 @@ int	main(int argc, char **argv)
 	if (errno)
 		return (error(errno));
 	philosophers = make_philosophers(params, forks, start_of_program);
-	printf("philo addreses in main: \n");
-	for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
-	{
-		printf("[%p]", philosophers[i]);
-	}
-	printf("\n");
-		for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
-	{
-		printf("queue: [%p]", philosophers[i]->queue->philo_array[i]);
-	}
-	printf("\n");
 	if (!philosophers) // Free the forks
 		return (error(BAD_ALLOC));
 	errno = start(philosophers, params); // TODO: CREATE A QUEUE HERE, AND SEND IT TO START

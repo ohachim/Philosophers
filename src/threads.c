@@ -6,29 +6,13 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/28 13:02:18 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/09 15:05:31 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
 
-unsigned int    get_milliseconds(unsigned int seconds, unsigned int microseconds) // should be unsigned?
-{
-    return((seconds * 1000) + (microseconds / 1000));
-}
-
-void	print_time_stamp( struct timeval start_of_program )
-{
-	struct timeval current_time;
-	unsigned int start;
-	unsigned int end;
-
-	gettimeofday(&current_time, NULL);
-	start = get_milliseconds(start_of_program.tv_sec, start_of_program.tv_usec);
-	end = get_milliseconds(current_time.tv_sec, current_time.tv_usec);
-	printf("[%u]\t", end - start);
-}
 
 int		calculate_death(t_philo_data *philo)
 {
@@ -55,7 +39,6 @@ void	*death_watch(void *args)
 	t_philo_data *philo;
 	philo = (t_philo_data*)args;
 
-	printf(" HERE I AM THIS ME: [%p][%d]\n", philo, philo->id);
 	while (1)
 	{
 		if (calculate_death(philo)
@@ -70,21 +53,37 @@ void	*death_watch(void *args)
 static void	take_forks(pthread_mutex_t *first_fork, pthread_mutex_t *second_fork,
 					t_philo_data *philo)
 {
-	mutex_print("wating for first fork", philo);
-	pthread_mutex_lock(first_fork);
+	// mutex_print("wating for first fork", philo);
+	// pthread_mutex_lock(first_fork);
 	mutex_print("has taken the first fork", philo);
-	mutex_print("wating for second fork", philo);
-	pthread_mutex_lock(second_fork);
+	// mutex_print("wating for second fork", philo);
+	// pthread_mutex_lock(second_fork);
 	mutex_print("has taken the second fork", philo);
 }
 
 static void	drop_forks(pthread_mutex_t *first_fork, pthread_mutex_t *second_fork,
 					t_philo_data *philo)
 {
-	pthread_mutex_unlock(first_fork);
-	mutex_print("has dropped the first fork", philo);
-	pthread_mutex_unlock(second_fork);
-	mutex_print("has dropped the second fork", philo);
+	// pthread_mutex_unlock(first_fork);
+	// mutex_print("has dropped the first fork", philo);
+	// pthread_mutex_unlock(second_fork);
+	// mutex_print("has dropped the second fork", philo);
+}
+
+int		forks_used(t_philo_data* philo)
+{
+	// printf("checked philo->id forks: %d", philo->id);
+	pthread_mutex_lock(&philo->left_fork->fork_protect);
+	pthread_mutex_lock(&philo->right_fork->fork_protect);
+	if (philo->left_fork->used || philo->right_fork->used)
+	{
+		pthread_mutex_unlock(&philo->left_fork->fork_protect);
+		pthread_mutex_unlock(&philo->right_fork->fork_protect);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->left_fork->fork_protect);
+	pthread_mutex_unlock(&philo->right_fork->fork_protect);
+	return (0);
 }
 
 void	*routine(void *args)
@@ -119,17 +118,6 @@ void	*routine(void *args)
 	return (NULL);
 }
 
-int		forks_used(t_philo_data* philo)
-{
-	printf("checked philo->id forks: %d", philo->id);
-	if (philo->left_fork->used || philo->right_fork->used)
-	{
-		printf(", its forks are not ready.\n");
-		return (1);
-	}
-	printf(", its forks are ready.\n");
-	return (0);
-}
 // //TODO: to remove rear
 void	print_queue(t_philo_queue *queue)
 {
@@ -140,11 +128,11 @@ void	print_queue(t_philo_queue *queue)
 	written = 0;
 	while (written < queue->size)
 	{
-		printf("[%d]", queue->philo_array[i]->id);
+		// printf("[%d]", queue->philo_array[i]->id);
 		i = (i + 1) % queue->capacity;
 		++written;
 	}
-	printf(" [queue size: %d, queue front: %d, queue rear: %d].\n", queue->size, queue->front, queue->rear);
+	// printf(" [queue size: %d, queue front: %d, queue rear: %d].\n", queue->size, queue->front, queue->rear);
 }
 
 void	swap_next_philo(t_philo_queue* queue) // too much power?
@@ -155,11 +143,11 @@ void	swap_next_philo(t_philo_queue* queue) // too much power?
 	// this loop should be able to loop through all the queue
 	while (1)
 	{
-		printf("before swap: ");
-		print_queue(queue);
+		// printf("before swap: ");
+		// print_queue(queue);
 		swap(queue->front, j, queue);
-		printf("indexes swapped are: %d %d==> after swap: ", queue->front, j);
-		print_queue(queue);
+		// printf("indexes swapped are: %d %d==> after swap: ", queue->front, j);
+		// print_queue(queue);
 		if (!forks_used(queue->philo_array[queue->front]))
 			break;
 		j = (j + 1) % queue->capacity;
@@ -179,7 +167,6 @@ void	*queue_watcher(void *args)
 	t_philo_queue *queue = (t_philo_queue*)args;
 
 	nb_phil_half = divide_by_2(queue->capacity);
-	printf("nb_phil_half: %d\n", nb_phil_half);
 	while (1)
 	{
 		if (queue->size == nb_phil_half + (queue->capacity / 2))
@@ -189,7 +176,10 @@ void	*queue_watcher(void *args)
 			while (queue->size > nb_phil_half)
 			{
 				if (!forks_used(front(queue)))
+				{
+					printf("dequeue id %d \n", front(queue)->id);
 					dequeue(queue);
+				}
 				else
 					swap_next_philo(queue);
 			}
@@ -210,19 +200,6 @@ int	start(t_philo_data **philosophers, int *params)
 	i = 0;
 	g_terminate = 0;
 	queue = philosophers[0]->queue;
-	printf("philo addreses in philosophers_init: \n");
-	for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
-	{
-		printf("[%p]", philosophers[i]);
-	}
-	printf("\n");
-	for (int i = 0; i < params[NB_PHILOSOPHERS]; i++)
-	{
-		printf("queue: [%p]", queue->philo_array[i]);
-	}
-	printf("\n\n\n\n\n\n\n");
-	// swap_next_philo(queue);
-	printf("\n\n\n\n\n\n****************************************************************************************\n");
 	if (pthread_create(&queue_thread, NULL, queue_watcher, (void*)queue))
 		return (BAD_CREATE);
 	while (i < params[NB_PHILOSOPHERS])

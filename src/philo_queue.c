@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:40:05 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/28 12:11:20 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/09 15:06:01 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ void			swap(int a, int b, t_philo_queue *queue)
 
 int				enqueue(t_philo_queue* queue, t_philo_data *philo)
 {
-	if (is_full(queue) && printf("this is full my dud\n"))
+	if (is_full(queue))
 		return -1;
-	printf("Enqueed philo num: %d\n", philo->id);
+	pthread_mutex_lock(&philo->left_fork->fork_protect);
 	philo->left_fork->used = 0;
+	pthread_mutex_unlock(&philo->left_fork->fork_protect);
+	pthread_mutex_lock(&philo->right_fork->fork_protect);
 	philo->right_fork->used = 0;
+	pthread_mutex_unlock(&philo->right_fork->fork_protect);
 	philo->should_eat = 0;
 	queue->rear = (queue->rear + 1) % queue->capacity;
 	queue->philo_array[queue->rear] = philo;
@@ -70,12 +73,15 @@ int		dequeue(t_philo_queue* queue)
 {
 	t_philo_data	*philo;
 
-	if (is_empty(queue) && printf("this is empty my dud\n"))
+	if (is_empty(queue))
 		return (-1);
 	philo = queue->philo_array[queue->front];
-	printf("dequeed philo num: %d\n", philo->id);
+	pthread_mutex_lock(&philo->left_fork->fork_protect);
 	philo->left_fork->used = 1;
+	pthread_mutex_unlock(&philo->left_fork->fork_protect);
+	pthread_mutex_lock(&philo->right_fork->fork_protect);
 	philo->right_fork->used = 1;
+	pthread_mutex_unlock(&philo->right_fork->fork_protect);
 	philo->should_eat = 1;
 	queue->size -= 1;
 	queue->front = (queue->front + 1) % queue->capacity;
