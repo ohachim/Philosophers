@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:42:31 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/08 21:18:33 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 14:27:06 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ unsigned int    get_milliseconds(unsigned int seconds, unsigned int microseconds
     return((seconds * 1000) + (microseconds / 1000));
 }
 
-void	print_time_stamp( struct timeval start_of_program)
+void	print_time_stamp(struct timeval start_of_program)
 {
 	struct timeval current_time;
 	unsigned int start;
@@ -36,5 +36,26 @@ void	print_time_stamp( struct timeval start_of_program)
 	gettimeofday(&current_time, NULL);
 	start = get_milliseconds(start_of_program.tv_sec, start_of_program.tv_usec);
 	end = get_milliseconds(current_time.tv_sec, current_time.tv_usec);
-	printf("[%u]\t", end - start);
+	ft_putchar('[');
+	ft_putnbr(end - start);
+	ft_putchar(']');
+	ft_putchar('\t');
+}
+
+unsigned int	get_current_time(void)
+{
+	struct timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	return (get_milliseconds(current_time.tv_sec, current_time.tv_usec));
+}
+
+void	ft_usleep(unsigned int time) // time in micro seconds
+{
+	unsigned int start;
+
+	time = time / 1000; // convert to milliseconds
+	start = get_current_time(); // in milliseconds
+	while (start + time > get_current_time())
+		usleep(10);
 }

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/08 20:40:53 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 16:05:41 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,42 @@
 
 //time to die, should be calculated at the beginning of the program or after the philosopher eats?
 
+
+void	del_mem(void **mem_adress)
+{
+	free(*mem_adress);
+	*mem_adress = NULL;
+}
+
+void	del_philosophers(t_philo_data ***philosophers, int nb_philosophers)
+{
+	int	i;
+
+	i = 0;
+	pthread_mutex_destroy((*philosophers)[0]->print_mutex);
+	del_mem((void**)&(*philosophers)[0]->print_mutex);
+	while (i < nb_philosophers)
+	{
+		pthread_mutex_destroy(&(*philosophers)[i]->death_mutex);
+		del_mem((void**)&(*philosophers)[i]);
+		++i;
+	}
+	free(*philosophers);
+	*philosophers = NULL;
+}
+
+void	clear_data(int **params, t_fork **forks, t_philo_data ***philosophers)
+{
+	del_philosophers(philosophers, (*params)[NB_PHILOSOPHERS]);
+	del_mem((void**)params);
+	del_mem((void**)forks);
+}
+
 int	main(int argc, char **argv)
 {
 	int					*params;
 	t_fork				*forks;
-	t_philo_data		**philosophers;
+	t_philo_data		**philosophers; // could have been a one dimention array?????????
 	struct timeval		start_of_program;
 	int					errno;
 
@@ -41,12 +72,6 @@ int	main(int argc, char **argv)
 	if (!params)
 		return (error(BAD_ALLOC));
 	init_parameters(argv, params, argc);
-	printf("%d, %d, %d, %d, %d, %d==\n", params[NB_PHILOSOPHERS],
-											params[NB_FORKS],
-											params[NB_EATS],
-											params[TIME_TO_DIE],
-											params[TIME_TO_EAT],
-											params[TIME_TO_SLEEP]);
 	errno = make_forks(params, &forks);
 	if (errno)
 		return (error(errno));
@@ -54,9 +79,10 @@ int	main(int argc, char **argv)
 	if (!philosophers) // Free the forks
 		return (error(BAD_ALLOC));
 	errno = start(philosophers, params); // TODO: CREATE A QUEUE HERE, AND SEND IT TO START
-	// if (errno)
-	// 	return (error(errno));
-	// return (EXIT_SUCCESS);
+	if (errno)
+		return (error(errno));
+	clear_data(&params, &forks, &philosophers);
+	return (EXIT_SUCCESS);
 }
 	/*TODO: destroy *forks
 	* free forks

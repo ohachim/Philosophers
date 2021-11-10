@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/08 20:51:07 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 14:46:58 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <pthread.h>
 #include <sys/time.h>
 #include <string.h>
+
+#define FALSE 0
+#define TRUE 1
 
 enum {
 	BAD_ALLOC = 1,
@@ -53,7 +56,7 @@ typedef struct				s_philo_data { // needs to be freed
 	int						number_eats;
 	int						dead;
 	struct timeval			start_of_program;
-	struct timeval			last_eat_time;
+	unsigned int			last_eat_time;
 	int						should_eat;
 	char					hand;
 	t_fork					*left_fork;
@@ -86,9 +89,9 @@ t_philo_data		**make_philosophers(int *params, t_fork *forks, struct timeval sta
 int					make_forks(int *params, t_fork **forks);
 void				init_parameters(char **argv, int *params, int argc);
 int					error(int errno);
-void				mutex_print(char *action, t_philo_data *philo);
+void				mutex_print(char *action, t_philo_data *philo, int lock);
 int					calculate_death(t_philo_data *philo);
-void				print_time_stamp( struct timeval start_of_program );
+void				print_time_stamp(struct timeval start_of_program);
 t_philo_queue		*create_queue(int capacity);
 int					dequeue(t_philo_queue *queue);
 int					enqueue(t_philo_queue* queue, t_philo_data *philo);
@@ -97,6 +100,10 @@ int					is_empty(t_philo_queue *queue);
 t_philo_data		*front(t_philo_queue *queue);
 t_philo_data		*rear(t_philo_queue* queue);
 void				swap(int a, int b, t_philo_queue *queue);
-void				print_time_stamp( struct timeval start_of_program);
 unsigned int  		get_milliseconds(unsigned int seconds, unsigned int microseconds);
+void				print_queue(t_philo_queue *queue);
+void				ft_usleep(unsigned int time);
+void				ft_putnbr(long long num);
+void				ft_putchar(char c);
+void				ft_putstr(char *str);
 #endif

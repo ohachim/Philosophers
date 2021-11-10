@@ -6,27 +6,33 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:17:38 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/08 20:51:20 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 16:09:30 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
-void	mutex_print(char *action, t_philo_data *philo)
+void	mutex_print(char *action, t_philo_data *philo, int lock)
 {
 		pthread_mutex_lock(philo->print_mutex);
-
 		print_time_stamp(philo->start_of_program);
-		printf("%d %s\n", philo->id, action);
-		pthread_mutex_unlock(philo->print_mutex);
+		ft_putnbr(philo->id);
+		ft_putchar(' ');
+		ft_putstr(action);
+		ft_putchar('\n');
+		if (!lock)
+			pthread_mutex_unlock(philo->print_mutex);
 }
 
 void	philo_eat(t_philo_data *philo)
 {
+	struct timeval		last_eat;
+
 	pthread_mutex_lock(&philo->death_mutex);
-	mutex_print("is eating", philo);
-	gettimeofday(&philo->last_eat_time, NULL);
-	usleep(philo->params[TIME_TO_EAT]);
+	mutex_print("is eating", philo, FALSE);
+	gettimeofday(&last_eat, NULL);
+	philo->last_eat_time = get_milliseconds(last_eat.tv_sec, last_eat.tv_usec);
+	ft_usleep(philo->params[TIME_TO_EAT]);
 	if (philo->params[NB_EATS] != -1)
 	{
 		philo->number_eats += 1;
@@ -38,11 +44,11 @@ void	philo_eat(t_philo_data *philo)
 
 void	philo_sleep(t_philo_data *philo)
 {
-	mutex_print("is sleeping", philo);
-	usleep(philo->params[TIME_TO_SLEEP]);
+	mutex_print("is sleeping", philo, FALSE);
+	ft_usleep(philo->params[TIME_TO_SLEEP]);
 }
 
 void	philo_think(t_philo_data *philo)
 {
-	mutex_print("is thinking", philo);
+	mutex_print("is thinking", philo, FALSE);
 }

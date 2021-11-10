@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/09 14:48:49 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 14:17:19 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,9 @@ t_philo_data	**make_philosophers(int *params, t_fork *forks, struct timeval star
 		philosophers[i]->start_of_program = start_of_program;
 		philosophers[i]->should_eat = 0;
 		philosophers[i]->queue = queue;
-		if (i != params[NB_PHILOSOPHERS] - 1)
-		{
-			philosophers[i]->left_fork = &forks[i];
-			philosophers[i]->right_fork = &forks[(i + 1) % params[NB_FORKS]];
-		}
-		else
-		{
-			philosophers[i]->right_fork = &forks[i];
-			philosophers[i]->left_fork = &forks[(i + 1) % params[NB_FORKS]];
-		}
+		philosophers[i]->right_fork = &forks[i];
+		philosophers[i]->left_fork = &forks[(i + 1) % params[NB_FORKS]];
+		
 		enqueue(queue, philosophers[i]); // some high quality "spaghetti code" right here
 		if (pthread_mutex_init(&philosophers[i]->death_mutex, NULL))
 			return (NULL);
