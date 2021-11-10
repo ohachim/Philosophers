@@ -6,13 +6,13 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:22:44 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/12 11:28:18 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 17:21:02 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
-int		error(int errno)
+int	error(int errno)
 {
 	printf("Error: ");
 	if (errno == BAD_ALLOC)

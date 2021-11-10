@@ -6,7 +6,7 @@
 #    By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 12:47:22 by ohachim           #+#    #+#              #
-#    Updated: 2021/11/10 10:59:13 by ohachim          ###   ########.fr        #
+#    Updated: 2021/11/10 17:39:30 by ohachim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC = gcc
 SRC_PATH = src
 
 SRC_NAME = error.c main.c my_atoi.c my_strdup.c my_strlen.c philo_actions.c \
-	philosopher_init.c threads.c philo_queue.c ft_putchar.c ft_putnbr.c
+	philosopher_init.c threads.c philo_queue.c ft_putchar.c ft_putnbr.c death.c \
+	queue_utils.c ft_putstr.c time.c queue_watcher.c del_mem.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
@@ -28,7 +29,6 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 INC = includes
 
 CFLAGS = -pthread #-Wall -Wextra -Werror
-CFLAGS =
 
 TARGET = philosopher
 

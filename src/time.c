@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:42:31 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 14:27:06 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 18:16:28 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ unsigned int	get_current_time(void)
 	return (get_milliseconds(current_time.tv_sec, current_time.tv_usec));
 }
 
-void	ft_usleep(unsigned int time) // time in micro seconds
+void	ft_usleep(unsigned int time)
 {
 	unsigned int start;
 
-	time = time / 1000; // convert to milliseconds
+	time = time / 1000;
 	start = get_current_time(); // in milliseconds
 	while (start + time > get_current_time())
 		usleep(10);

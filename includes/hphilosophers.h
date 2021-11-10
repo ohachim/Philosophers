@@ -6,22 +6,22 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 14:46:58 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 18:14:37 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HPHILOSOPHERS_H
 # define HPHILOSOPHERS_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <pthread.h>
-#include <sys/time.h>
-#include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <sys/time.h>
+# include <string.h>
 
-#define FALSE 0
-#define TRUE 1
+# define FALSE 0
+# define TRUE 1
 
 enum {
 	BAD_ALLOC = 1,
@@ -41,17 +41,16 @@ enum {
 	NB_EATS,
 };
 
+int						g_philo_eat_goal; // member variable of philo
+int						g_terminate; // member variable of philo
 
-int						g_philo_eat_goal; // Usless
-int						g_terminate; // Usless
-
-typedef struct 		s_fork { // needs to be freed
-	unsigned int	id; // TODO: not needed?
+typedef struct s_fork {
+	unsigned int	id;
 	int				used;
-	pthread_mutex_t fork_protect; // needs to be destroyed
-} 					t_fork;
+	pthread_mutex_t	fork_protect;
+}				t_fork;
 
-typedef struct				s_philo_data { // needs to be freed
+typedef struct s_philo_data {
 	unsigned int			id;
 	int						number_eats;
 	int						dead;
@@ -62,19 +61,18 @@ typedef struct				s_philo_data { // needs to be freed
 	t_fork					*left_fork;
 	t_fork					*right_fork;
 	int						*params;
-	pthread_mutex_t 		*print_mutex; // needs to be destroyed and freed
-	pthread_mutex_t 		death_mutex; // needs to be destroyed
-
+	pthread_mutex_t			*print_mutex;
+	pthread_mutex_t			death_mutex;
 	struct s_philo_queue	*queue;
-}							t_philo_data;
-typedef struct 			s_philo_queue {
-	int 				size;
-	int 				front;
-	int 				rear;
+}				t_philo_data;
+typedef struct s_philo_queue {
+	int					size;
+	int					front;
+	int					rear;
 	pthread_mutex_t		lock;
-	unsigned int 		capacity;
+	unsigned int		capacity;
 	t_philo_data		**philo_array;
-}						t_philo_queue;
+}				t_philo_queue;
 
 int					my_atoi(char *str);
 unsigned int		my_strlen(char *str); // currently not in use
@@ -85,7 +83,8 @@ void				philo_eat(t_philo_data *philo);
 int					start(t_philo_data **philosophers, int *params);
 void				*routine(void *args);
 void				*watch_philos(void *args);
-t_philo_data		**make_philosophers(int *params, t_fork *forks, struct timeval start_of_program);
+t_philo_data		**make_philosophers(int *params, t_fork *forks,
+						struct timeval start_of_program);
 int					make_forks(int *params, t_fork **forks);
 void				init_parameters(char **argv, int *params, int argc);
 int					error(int errno);
@@ -94,16 +93,19 @@ int					calculate_death(t_philo_data *philo);
 void				print_time_stamp(struct timeval start_of_program);
 t_philo_queue		*create_queue(int capacity);
 int					dequeue(t_philo_queue *queue);
-int					enqueue(t_philo_queue* queue, t_philo_data *philo);
+int					enqueue(t_philo_queue *queue, t_philo_data *philo);
 int					is_full(t_philo_queue *queue);
 int					is_empty(t_philo_queue *queue);
 t_philo_data		*front(t_philo_queue *queue);
-t_philo_data		*rear(t_philo_queue* queue);
-void				swap(int a, int b, t_philo_queue *queue);
-unsigned int  		get_milliseconds(unsigned int seconds, unsigned int microseconds);
-void				print_queue(t_philo_queue *queue);
+t_philo_data		*rear(t_philo_queue *queue);
+unsigned int		get_milliseconds(unsigned int seconds,
+						unsigned int microseconds);
 void				ft_usleep(unsigned int time);
 void				ft_putnbr(long long num);
 void				ft_putchar(char c);
 void				ft_putstr(char *str);
+void				*death_watch(void *args);
+int					calculate_death(t_philo_data *philo);
+void				*queue_watcher(void *args);
+void				del_mem(void **mem_adress);
 #endif

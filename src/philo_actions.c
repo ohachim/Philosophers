@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:17:38 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 16:09:30 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 18:18:36 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	mutex_print(char *action, t_philo_data *philo, int lock)
 {
-		pthread_mutex_lock(philo->print_mutex);
-		print_time_stamp(philo->start_of_program);
-		ft_putnbr(philo->id);
-		ft_putchar(' ');
-		ft_putstr(action);
-		ft_putchar('\n');
-		if (!lock)
-			pthread_mutex_unlock(philo->print_mutex);
+	pthread_mutex_lock(philo->print_mutex);
+	print_time_stamp(philo->start_of_program);
+	ft_putnbr(philo->id);
+	ft_putchar(' ');
+	ft_putstr(action);
+	ft_putchar('\n');
+	if (!lock)
+		pthread_mutex_unlock(philo->print_mutex);
 }
 
 void	philo_eat(t_philo_data *philo)
 {
-	struct timeval		last_eat;
+	struct timeval	last_eat;
 
 	pthread_mutex_lock(&philo->death_mutex);
 	mutex_print("is eating", philo, FALSE);

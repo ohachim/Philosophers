@@ -6,13 +6,13 @@
 /*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:16:27 by ohachim           #+#    #+#             */
-/*   Updated: 2021/10/05 17:20:07 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/10 17:44:16 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 unsigned int	my_strlen(char *str)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (!str)
