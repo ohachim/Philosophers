@@ -28,9 +28,9 @@ void	*routine(void *args)
 		while (!philo->should_eat)
 			usleep(10);
 		philo_eat(philo);
-		pthread_mutex_lock(&philo->queue->lock);
+		// pthread_mutex_lock(&philo->queue->lock);
 		enqueue(philo->queue, philo);
-		pthread_mutex_unlock(&philo->queue->lock);
+		// pthread_mutex_unlock(&philo->queue->lock);
 		philo_sleep(philo);
 		philo_think(philo);
 	}

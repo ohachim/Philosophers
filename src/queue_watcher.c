@@ -56,7 +56,7 @@ static void	swap_next_philo(t_philo_queue* queue)
 		swap(queue->front, j, queue);
 		if (!forks_used(queue->philo_array[queue->front]))
 			break;
-		j = (j + 1) % queue->capacity;
+		j = (j + 1) % queue->capacity;// should reboot at front, and should be modulo size not capacity
 	}
 }
 
@@ -71,15 +71,15 @@ void	*queue_watcher(void *args)
 	{
 		if (queue->size == nb_phil_half + (queue->capacity / 2))
 		{
-			pthread_mutex_lock(&queue->lock);
-			while (queue->size > nb_phil_half)
+			// pthread_mutex_lock(&queue->lock);
+			while (queue->size > nb_phil_half)// variable that tells us how much/when to dequeue
 			{
 				if (!forks_used(front(queue)))
 					dequeue(queue);
 				else
 					swap_next_philo(queue);
 			}
-			pthread_mutex_unlock(&queue->lock);
+			// pthread_mutex_unlock(&queue->lock);
 		}
 		usleep(50);
 	}
