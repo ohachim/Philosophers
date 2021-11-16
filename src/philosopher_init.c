@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
+/*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 18:18:15 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/17 00:03:43 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	init_parameters(char **argv, int *params, int argc)
 	}
 	if (i == NB_EATS)
 		params[i] = -1;
-	params[TIME_TO_EAT] *= 1000;
-	params[TIME_TO_SLEEP] *= 1000;
 }
 
 int	make_forks(int *params, t_fork **forks)

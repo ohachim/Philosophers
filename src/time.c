@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
+/*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:42:31 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 18:16:28 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/17 00:05:18 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void	ft_usleep(unsigned int time)
 {
 	unsigned int start;
 
-	time = time / 1000;
-	start = get_current_time(); // in milliseconds
+	start = get_current_time();
 	while (start + time > get_current_time())
 		usleep(10);
 }
