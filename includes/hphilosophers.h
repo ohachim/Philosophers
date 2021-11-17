@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hphilosophers.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
+/*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 18:14:37 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/17 23:20:47 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int						g_terminate; // member variable of philo
 typedef struct s_fork {
 	unsigned int	id;
 	int				used;
+	short			last_user_id;
 	pthread_mutex_t	fork_protect;
 }				t_fork;
 

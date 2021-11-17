@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
+/*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 17:00:13 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/17 23:34:01 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,9 @@ void	*routine(void *args)
 	philo->last_eat_time = get_milliseconds(last_eat_time.tv_sec, last_eat_time.tv_usec);
 	if (pthread_create(&watcher, NULL, death_watch, philo))
 		return (NULL);
-	while (1 && !g_terminate)
+	while (!g_terminate)
 	{
-		while (!philo->should_eat)
-			usleep(10);
 		philo_eat(philo);
-		// pthread_mutex_lock(&philo->queue->lock);
-		enqueue(philo->queue, philo);
-		// pthread_mutex_unlock(&philo->queue->lock);
 		philo_sleep(philo);
 		philo_think(philo);
 	}
@@ -47,8 +42,6 @@ int	start(t_philo_data **philosophers, int *params)
 	i = 0;
 	g_terminate = 0;
 	queue = philosophers[0]->queue;
-	if (pthread_create(&queue_thread, NULL, queue_watcher, (void*)queue))
-		return (BAD_CREATE);
 	while (i < params[NB_PHILOSOPHERS])
 	{
 		if (pthread_create(&philo_threads[i], NULL, routine, (void*)philosophers[i]))
@@ -57,6 +50,7 @@ int	start(t_philo_data **philosophers, int *params)
 			return (BAD_DETACH);
 		++i;
 	}
-	pthread_join(queue_thread, NULL);
+	while (!g_terminate)
+		usleep(200);
 	return (0);
 }
