@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
+/*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:22:44 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 17:21:02 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 02:48:25 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ int	error(int errno)
 	else if (errno == BAD_PARAMETERS)
 		printf("Wrong parameteres format.\n");
 	else if (errno == BAD_DETACH)
-		printf("Detach gone wrong");
+		printf("Detach gone wrong.\n");
 	else if (errno == BAD_CREATE)
-		printf("Thread Create gone wrong");
+		printf("Thread Create gone wrong.\n");
 	else if (errno == BAD_JOIN)
-		printf("Join gone wrong");
+		printf("Join gone wrong.\n");
+	else if (errno == BAD_PHILOSOPHERS)
+		printf("Philosopher intialization failed.\n");
 	return (EXIT_FAILURE);
 }

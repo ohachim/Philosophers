@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
+/*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 17:42:32 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 04:20:18 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ int	main(int argc, char **argv)
 	if (errno)
 		return (clear_and_exit(&params, &forks, &philosophers, errno));
 	philosophers = make_philosophers(params, forks, start_of_program);
-	if (!philosophers) // Free the forks
-		return (clear_and_exit(&params, &forks, &philosophers, errno));
+	if (!philosophers)
+		return (clear_and_exit(&params, &forks, &philosophers,
+				BAD_PHILOSOPHERS));
 	errno = start(philosophers, params);
 	if (errno)
 		return (clear_and_exit(&params, &forks, &philosophers, errno));

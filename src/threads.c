@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/17 23:34:01 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 04:30:21 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*routine(void *args)
 	gettimeofday(&last_eat_time, NULL);
 	philo->last_eat_time = get_milliseconds(last_eat_time.tv_sec, last_eat_time.tv_usec);
 	if (pthread_create(&watcher, NULL, death_watch, philo))
-		return (NULL);
+		g_terminate = 1;
 	while (!g_terminate)
 	{
 		philo_eat(philo);
@@ -34,14 +34,15 @@ void	*routine(void *args)
 
 int	start(t_philo_data **philosophers, int *params)
 {
-	pthread_t 		philo_threads[params[NB_PHILOSOPHERS]];
-	pthread_t		queue_thread;
-	t_philo_queue	*queue;
+	pthread_t	*philo_threads;
 	int			i;
 
 	i = 0;
 	g_terminate = 0;
-	queue = philosophers[0]->queue;
+	philo_threads = (pthread_t *)malloc(sizeof(pthread_t)
+			* params[NB_PHILOSOPHERS]);
+	if (!philo_threads)
+		return (BAD_ALLOC);
 	while (i < params[NB_PHILOSOPHERS])
 	{
 		if (pthread_create(&philo_threads[i], NULL, routine, (void*)philosophers[i]))
@@ -51,6 +52,7 @@ int	start(t_philo_data **philosophers, int *params)
 		++i;
 	}
 	while (!g_terminate)
-		usleep(200);
+		usleep(500);
+	del_mem((void **)&philo_threads);
 	return (0);
 }

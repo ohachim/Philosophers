@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohachim <ohachim@1337.student.ma>          +#+  +:+       +#+        */
+/*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 16:56:56 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/10 17:20:16 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 04:31:00 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	calculate_death(t_philo_data *philo)
 		- philo->last_eat_time;
 	if (i > philo->params[TIME_TO_DIE])
 	{
-		g_terminate = 1;
 		mutex_print("dead", philo, TRUE);
 		return (1);
 	}
@@ -36,12 +35,12 @@ void	*death_watch(void *args)
 	t_philo_data	*philo;
 
 	philo = (t_philo_data *)args;
-	while (1)
+	while (!g_terminate)
 	{
 		if (calculate_death(philo)
 			|| g_philo_eat_goal == philo->params[NB_PHILOSOPHERS])
 			g_terminate = 1;
-		usleep(10);
+		usleep(20);
 	}
 	return (NULL);
 }

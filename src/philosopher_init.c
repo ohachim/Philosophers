@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/17 00:03:43 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 03:43:56 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,13 @@ t_philo_data	**make_philosophers(int *params, t_fork *forks,
 {
 	t_philo_data		**philosophers;
 	pthread_mutex_t		*print_mutex;
-	t_philo_queue		*queue;
 	int					i;
 
 	i = 0;
-	queue = create_queue(params[NB_PHILOSOPHERS]);
 	philosophers = (t_philo_data **)malloc(sizeof(t_philo_data *)
 			* params[NB_PHILOSOPHERS]);
 	print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	if (!queue || !philosophers || !print_mutex
+	if (!philosophers || !print_mutex
 	|| pthread_mutex_init(print_mutex, NULL))
 		return (NULL);
 	while (i < params[NB_PHILOSOPHERS])
@@ -75,10 +73,8 @@ t_philo_data	**make_philosophers(int *params, t_fork *forks,
 		philosophers[i]->print_mutex = print_mutex;
 		philosophers[i]->start_of_program = start_of_program;
 		philosophers[i]->should_eat = 0;
-		philosophers[i]->queue = queue;
 		philosophers[i]->right_fork = &forks[i];
 		philosophers[i]->left_fork = &forks[(i + 1) % params[NB_FORKS]];
-		enqueue(queue, philosophers[i]);
 		if (pthread_mutex_init(&philosophers[i]->death_mutex, NULL))
 			return (NULL);
 		++i;
