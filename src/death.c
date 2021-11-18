@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 16:56:56 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 04:31:00 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 04:42:46 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*death_watch(void *args)
 		if (calculate_death(philo)
 			|| g_philo_eat_goal == philo->params[NB_PHILOSOPHERS])
 			g_terminate = 1;
-		usleep(20);
+		usleep(WAIT_TIME);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:42:31 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/17 00:05:18 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 05:15:55 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ static unsigned int	get_time(void)
 	return (end);
 }
 
-unsigned int    get_milliseconds(unsigned int seconds, unsigned int microseconds) // should be unsigned?
+unsigned int	get_milliseconds(unsigned int seconds,
+		unsigned int microseconds)
 {
-    return((seconds * 1000) + (microseconds / 1000));
+	return ((seconds * 1000) + (microseconds / 1000));
 }
 
 void	print_time_stamp(struct timeval start_of_program)
 {
-	struct timeval current_time;
-	unsigned int start;
-	unsigned int end;
+	struct timeval	current_time;
+	unsigned int	start;
+	unsigned int	end;
 
 	gettimeofday(&current_time, NULL);
 	start = get_milliseconds(start_of_program.tv_sec, start_of_program.tv_usec);
@@ -52,7 +53,7 @@ unsigned int	get_current_time(void)
 
 void	ft_usleep(unsigned int time)
 {
-	unsigned int start;
+	unsigned int	start;
 
 	start = get_current_time();
 	while (start + time > get_current_time())

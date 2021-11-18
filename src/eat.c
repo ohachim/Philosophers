@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 03:59:07 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 04:30:04 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 04:52:34 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	drop_forks(t_philo_data *philo)
 void	prepare_to_eat(t_philo_data *philo)
 {
 	while (forks_taken(philo)
-			|| is_last_user(philo, philo->left_fork)
-			|| is_last_user(philo, philo->right_fork))
-		usleep(20); 
+		|| is_last_user(philo, philo->left_fork)
+		|| is_last_user(philo, philo->right_fork))
+		usleep(WAIT_TIME);
 	take_forks(philo);
 }

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 04:21:52 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 05:12:40 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ enum {
 	NB_EATS,
 };
 
-int						g_philo_eat_goal; // member variable of philo
-int						g_terminate; // member variable of philo
+int						g_philo_eat_goal;
+int						g_terminate;
 
 typedef struct s_fork {
 	unsigned int	id;
