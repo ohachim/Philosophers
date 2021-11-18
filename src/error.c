@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:22:44 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 02:48:25 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 15:46:22 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	error(int errno)
 		printf("Join gone wrong.\n");
 	else if (errno == BAD_PHILOSOPHERS)
 		printf("Philosopher intialization failed.\n");
+	else if (errno == ZERO_PHILOSOPHERS)
+		printf("Zero philosophers.\n");
 	return (EXIT_FAILURE);
 }

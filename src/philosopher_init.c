@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 05:14:40 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 15:19:56 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_parameters(char **argv, int *params, int argc)
 	while (i < argc - 1)
 	{
 		params[i] = my_atoi(argv[i + 1]);
+		if (params[i] < 0)
+			params[i] = 0;
 		++i;
 	}
 	if (i == NB_EATS)
@@ -44,6 +46,7 @@ int	make_forks(int *params, t_fork **forks)
 		}
 		(*forks)[i].id = i;
 		(*forks)[i].used = 0;
+		(*forks)[i].last_user_id = -1;
 		++i;
 	}
 	return (0);

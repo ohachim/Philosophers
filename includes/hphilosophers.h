@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 05:12:40 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:38:06 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define TRUE 1
 
 # define WAIT_TIME 100
-# define WAIT_TIME_DEATH 10
 
 enum {
 	BAD_ALLOC = 1,
@@ -33,7 +32,8 @@ enum {
 	BAD_JOIN,
 	BAD_CREATE,
 	BAD_DETACH,
-	BAD_PHILOSOPHERS
+	BAD_PHILOSOPHERS,
+	ZERO_PHILOSOPHERS
 };
 
 enum {
@@ -58,20 +58,18 @@ typedef struct s_fork {
 typedef struct s_philo_data {
 	unsigned int			id;
 	int						number_eats;
-	int						dead;
 	struct timeval			start_of_program;
 	unsigned int			last_eat_time;
 	int						should_eat;
-	char					hand;
 	t_fork					*left_fork;
 	t_fork					*right_fork;
 	int						*params;
 	pthread_mutex_t			*print_mutex;
 	pthread_mutex_t			death_mutex;
-	struct s_philo_queue	*queue;
 }				t_philo_data;
+
 int					my_atoi(char *str);
-unsigned int		my_strlen(char *str); // currently not in use
+unsigned int		my_strlen(char *str);
 void				philo_think(t_philo_data *philo);
 void				philo_sleep(t_philo_data *philo);
 void				philo_eat(t_philo_data *philo);
@@ -94,9 +92,9 @@ void				ft_putstr(char *str);
 void				*death_watch(void *args);
 int					calculate_death(t_philo_data *philo);
 void				del_mem(void **mem_adress);
-void				prepare_to_eat(t_philo_data *philo);
 void				take_forks(t_philo_data *philo);
 void				drop_forks(t_philo_data *philo);
 int					forks_taken(t_philo_data *philo);
 int					is_last_user(t_philo_data *philo, t_fork *fork);
+int					try_take_forks(t_philo_data *philo);
 #endif

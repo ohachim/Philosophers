@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 04:53:05 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:09:10 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	start(t_philo_data **philosophers, int *params)
 			* params[NB_PHILOSOPHERS]);
 	if (!philo_threads)
 		return (BAD_ALLOC);
+	if (!params[NB_PHILOSOPHERS] || !params[NB_EATS])
+		return (BAD_PARAMETERS);
 	while (i < params[NB_PHILOSOPHERS])
 	{
 		if (pthread_create(&philo_threads[i], NULL,

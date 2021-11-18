@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:17:38 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 04:28:38 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:35:40 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ void	mutex_print(char *action, t_philo_data *philo, int lock)
 		pthread_mutex_unlock(philo->print_mutex);
 }
 
+static void	prepare_to_eat(t_philo_data *philo)
+{
+	while (try_take_forks(philo))
+		usleep(WAIT_TIME);
+}
+
 void	philo_eat(t_philo_data *philo)
 {
 	struct timeval	last_eat;
 
 	prepare_to_eat(philo);
-	take_forks(philo);
 	pthread_mutex_lock(&philo->death_mutex);
 	gettimeofday(&last_eat, NULL);
 	mutex_print("is eating", philo, FALSE);

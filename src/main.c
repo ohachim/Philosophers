@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 04:20:18 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:02:40 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ void	del_philosophers(t_philo_data ***philosophers, int nb_philosophers)
 	int	i;
 
 	i = 0;
-	pthread_mutex_destroy((*philosophers)[0]->print_mutex);
-	del_mem((void **)&(*philosophers)[0]->print_mutex);
-	while (i < nb_philosophers)
+	if (nb_philosophers)
 	{
-		pthread_mutex_destroy(&(*philosophers)[i]->death_mutex);
-		del_mem((void **)&(*philosophers)[i]);
-		++i;
+		pthread_mutex_destroy((*philosophers)[0]->print_mutex);
+		del_mem((void **)&(*philosophers)[0]->print_mutex);
+		while (i < nb_philosophers)
+		{
+			pthread_mutex_destroy(&(*philosophers)[i]->death_mutex);
+			del_mem((void **)&(*philosophers)[i]);
+			++i;
+		}
 	}
 	free(*philosophers);
 	*philosophers = NULL;
