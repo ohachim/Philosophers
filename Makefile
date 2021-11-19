@@ -6,7 +6,7 @@
 #    By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 12:47:22 by ohachim           #+#    #+#              #
-#    Updated: 2021/11/18 15:49:06 by ohachim          ###   ########.fr        #
+#    Updated: 2021/11/19 16:33:44 by ohachim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ HEADER_NAME = hphilosophers.h
 
 HEADER = $(addprefix $(INC)/, $(HEADER_NAME))
 
-CFLAGS = -pthread -g #-Wall -Wextra -Werror -g
+CFLAGS = -pthread -Wall -Wextra -Werror
 
 TARGET = philosopher
 

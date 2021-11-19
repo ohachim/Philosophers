@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:17:38 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 16:35:40 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/19 16:20:39 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	mutex_print(char *action, t_philo_data *philo, int lock)
 {
 	pthread_mutex_lock(philo->print_mutex);
-	print_time_stamp(philo->start_of_program);
+	print_time_stamp(philo->start_program);
 	ft_putnbr(philo->id);
 	ft_putchar(' ');
 	ft_putstr(action);
@@ -45,7 +45,7 @@ void	philo_eat(t_philo_data *philo)
 	{
 		philo->number_eats += 1;
 		if (philo->number_eats == philo->params[NB_EATS])
-			g_philo_eat_goal += 1;
+			*(philo->philo_eat_goal) += 1;
 	}
 	pthread_mutex_unlock(&philo->death_mutex);
 }

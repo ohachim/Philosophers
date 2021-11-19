@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 16:56:56 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 16:06:43 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/19 16:15:32 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	*death_watch(void *args)
 	t_philo_data	*philo;
 
 	philo = (t_philo_data *)args;
-	while (!g_terminate)
+	while (!*(philo->terminate))
 	{
 		if (calculate_death(philo)
-			|| g_philo_eat_goal == philo->params[NB_PHILOSOPHERS])
-			g_terminate = 1;
+			|| *(philo->philo_eat_goal) == philo->params[NB_PHILOSOPHERS])
+			*(philo->terminate) = 1;
 		usleep(WAIT_TIME);
 	}
 	return (NULL);

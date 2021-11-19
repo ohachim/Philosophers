@@ -6,21 +6,11 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:42:31 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 05:15:55 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/19 16:20:32 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
-
-static unsigned int	get_time(void)
-{
-	struct timeval	tv;
-	long			end;
-
-	gettimeofday(&tv, NULL);
-	end = ((tv.tv_sec * 1000) + tv.tv_usec / 1000);
-	return (end);
-}
 
 unsigned int	get_milliseconds(unsigned int seconds,
 		unsigned int microseconds)
@@ -28,17 +18,15 @@ unsigned int	get_milliseconds(unsigned int seconds,
 	return ((seconds * 1000) + (microseconds / 1000));
 }
 
-void	print_time_stamp(struct timeval start_of_program)
+void	print_time_stamp(unsigned int start_of_program)
 {
 	struct timeval	current_time;
-	unsigned int	start;
 	unsigned int	end;
 
 	gettimeofday(&current_time, NULL);
-	start = get_milliseconds(start_of_program.tv_sec, start_of_program.tv_usec);
 	end = get_milliseconds(current_time.tv_sec, current_time.tv_usec);
 	ft_putchar('[');
-	ft_putnbr(end - start);
+	ft_putnbr(end - start_of_program);
 	ft_putchar(']');
 	ft_putchar('\t');
 }

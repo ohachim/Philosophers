@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 16:02:40 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/19 16:29:19 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int	clear_and_exit(int **params, t_fork **forks, t_philo_data ***philosophers,
 void	ft_init_data(int *errno, t_fork **forks, t_philo_data ***philosophers)
 {
 	*errno = 0;
-	g_terminate = 0;
-	g_philo_eat_goal = 0;
 	*forks = NULL;
 	*philosophers = NULL;
 }
@@ -70,7 +68,7 @@ int	main(int argc, char **argv)
 	gettimeofday(&start_of_program, NULL);
 	if (argc != 5 && argc != 6)
 		return (error(BAD_PARAMETERS));
-	params = (int *)malloc(sizeof(int) * argc - 1);
+	params = malloc(sizeof(*params) * argc - 1);
 	if (!params)
 		return (error(BAD_ALLOC));
 	init_parameters(argv, params, argc);

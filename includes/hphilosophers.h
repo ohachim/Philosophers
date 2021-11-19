@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 16:38:06 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/19 16:21:37 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,23 @@ enum {
 	NB_EATS,
 };
 
-int						g_philo_eat_goal;
-int						g_terminate;
-
 typedef struct s_fork {
 	unsigned int	id;
 	int				used;
-	short			last_user_id;
+	unsigned int	last_user_id;
 	pthread_mutex_t	fork_protect;
 }				t_fork;
 
 typedef struct s_philo_data {
 	unsigned int			id;
-	int						number_eats;
-	struct timeval			start_of_program;
 	unsigned int			last_eat_time;
-	int						should_eat;
+	int						number_eats;
+	int						*terminate;
+	int						*philo_eat_goal;
+	int						*params;
+	unsigned int			start_program;
 	t_fork					*left_fork;
 	t_fork					*right_fork;
-	int						*params;
 	pthread_mutex_t			*print_mutex;
 	pthread_mutex_t			death_mutex;
 }				t_philo_data;
@@ -74,7 +72,6 @@ void				philo_think(t_philo_data *philo);
 void				philo_sleep(t_philo_data *philo);
 void				philo_eat(t_philo_data *philo);
 int					start(t_philo_data **philosophers, int *params);
-void				*routine(void *args);
 t_philo_data		**make_philosophers(int *params, t_fork *forks,
 						struct timeval start_of_program);
 int					make_forks(int *params, t_fork **forks);
@@ -82,7 +79,7 @@ void				init_parameters(char **argv, int *params, int argc);
 int					error(int errno);
 void				mutex_print(char *action, t_philo_data *philo, int lock);
 int					calculate_death(t_philo_data *philo);
-void				print_time_stamp(struct timeval start_of_program);
+void				print_time_stamp(unsigned int start_of_program);
 unsigned int		get_milliseconds(unsigned int seconds,
 						unsigned int microseconds);
 void				ft_usleep(unsigned int time);

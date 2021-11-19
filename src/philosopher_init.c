@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 15:19:56 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/19 16:32:51 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ t_philo_data	*init_philosopher(int *params, t_fork *forks, int index,
 {
 	t_philo_data	*philosopher;
 
-	philosopher = (t_philo_data *)malloc(sizeof(t_philo_data)
+	philosopher = malloc(sizeof(*philosopher)
 			* params[NB_PHILOSOPHERS]);
 	if (!philosopher)
 		return (NULL);
 	philosopher->id = index + 1;
 	philosopher->number_eats = 0;
 	philosopher->params = params;
-	philosopher->should_eat = 0;
 	philosopher->right_fork = &forks[index];
 	philosopher->left_fork = &forks[(index + 1) % params[NB_FORKS]];
-	philosopher->start_of_program = start_of_program;
+	philosopher->start_program = get_milliseconds(start_of_program.tv_sec,
+			start_of_program.tv_usec);
 	return (philosopher);
 }
 
@@ -79,9 +79,8 @@ t_philo_data	**make_philosophers(int *params, t_fork *forks,
 	int					i;
 
 	i = 0;
-	philosophers = (t_philo_data **)malloc(sizeof(t_philo_data *)
-			* params[NB_PHILOSOPHERS]);
-	print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	philosophers = malloc(sizeof(*philosophers) * params[NB_PHILOSOPHERS]);
+	print_mutex = malloc(sizeof(*print_mutex) * 1);
 	if (!philosophers || !print_mutex || pthread_mutex_init(print_mutex, NULL))
 		return (NULL);
 	while (i < params[NB_PHILOSOPHERS])
