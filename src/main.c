@@ -6,37 +6,16 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/24 11:41:04 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/24 14:29:28 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
-void	del_philosophers(t_philo_data ***philosophers, int nb_philosophers)
-{
-	int	i;
-
-	i = 0;
-	if (nb_philosophers)
-	{
-		pthread_mutex_destroy((*philosophers)[0]->print_mutex);
-		del_mem((void **)&(*philosophers)[0]->print_mutex);
-		while ((*philosophers)[i] && i < nb_philosophers)
-		{
-			pthread_mutex_destroy(&(*philosophers)[i]->death_mutex);
-			del_mem((void **)&(*philosophers)[i]);
-			++i;
-		}
-	}
-	free(*philosophers);
-	*philosophers = NULL;
-}
-
 void	clear_data(int **params, t_fork **forks, t_philo_data ***philosophers)
 {
 	if (*philosophers)
 		del_philosophers(philosophers, (*params)[NB_PHILOSOPHERS]);
-	printf("%p: this is the address\n", *forks);
 	if (*forks)
 		del_mem((void **)forks);
 	if (*params)
@@ -47,7 +26,9 @@ int	clear_and_exit(int **params, t_fork **forks, t_philo_data ***philosophers,
 				int errno)
 {
 	clear_data(params, forks, philosophers);
-	return (error(errno));
+	if (errno != TOTAL)
+		return (error(errno));
+	return (EXIT_SUCCESS);
 }
 
 void	ft_init_data(int *errno, t_fork **forks, t_philo_data ***philosophers)
@@ -68,11 +49,13 @@ int	main(int argc, char **argv)
 	ft_init_data(&errno, &forks, &philosophers);
 	gettimeofday(&start_of_program, NULL);
 	if (argc != 5 && argc != 6)
-		return (error(BAD_PARAMETERS));
-	params = malloc(sizeof(*params) * (argc - 1));
+		return (error(BAD_PARAMS));
+	params = malloc(sizeof(*params) * argc);
 	if (!params)
 		return (error(BAD_ALLOC));
 	init_parameters(argv, params, argc);
+	if (!params[NB_PHILOSOPHERS] || !params[NB_EATS])
+		return (clear_and_exit(&params, &forks, &philosophers, BAD_PARAMS));
 	errno = make_forks(&params, &forks);
 	if (errno)
 		return (clear_and_exit(&params, &forks, &philosophers, errno));
@@ -81,7 +64,5 @@ int	main(int argc, char **argv)
 		return (clear_and_exit(&params, &forks, &philosophers,
 				BAD_PHILOSOPHERS));
 	errno = start(philosophers, params);
-	if (errno)
-		return (clear_and_exit(&params, &forks, &philosophers, errno));
-	return (EXIT_SUCCESS);
+	return (clear_and_exit(&params, &forks, &philosophers, errno));
 }

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/19 16:28:02 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/24 14:28:30 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	setup_philo_threads(t_philo_data **philosophers,
 	int	i;
 
 	i = -1;
-	terminate = malloc(sizeof(*terminate) * 1);
-	philo_eat_goal = malloc(sizeof(*philo_eat_goal) * 1);
+	terminate = malloc(sizeof(*terminate));
+	philo_eat_goal = malloc(sizeof(*philo_eat_goal));
 	*philo_threads = malloc(sizeof(**philo_threads)
 			* params[NB_PHILOSOPHERS]);
 	if (!terminate || !philo_eat_goal || !philo_threads)
@@ -76,8 +76,6 @@ int	start(t_philo_data **philosophers, int *params)
 	setup_philo_threads(philosophers, &philo_threads, params);
 	if (!philo_threads)
 		return (BAD_ALLOC);
-	if (!params[NB_PHILOSOPHERS] || !params[NB_EATS])
-		return (free_threads(&philo_threads, BAD_PARAMETERS));
 	while (i < params[NB_PHILOSOPHERS])
 	{
 		if (pthread_create(&philo_threads[i], NULL,
@@ -90,5 +88,5 @@ int	start(t_philo_data **philosophers, int *params)
 	while (!*(philosophers[0]->terminate))
 		usleep(WAIT_TIME);
 	del_mem((void **)&philo_threads);
-	return (0);
+	return (TOTAL);
 }

@@ -6,7 +6,7 @@
 #    By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 12:47:22 by ohachim           #+#    #+#              #
-#    Updated: 2021/11/24 11:38:33 by ohachim          ###   ########.fr        #
+#    Updated: 2021/11/24 14:20:28 by ohachim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_PATH = src
 
 SRC_NAME = error.c main.c my_atoi.c my_strlen.c philo_actions.c \
 	philosopher_init.c threads.c ft_putchar.c ft_putnbr.c death.c \
-	ft_putstr.c time.c del_mem.c eat.c
+	ft_putstr.c time.c del_mem.c eat.c del_resources.c
 
 OBJ_PATH = obj
 

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:22:44 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/18 15:46:22 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/24 14:29:28 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	error(int errno)
 		printf("Bad allocation.\n");
 	else if (errno == FAIL_MUTEX_INIT)
 		printf("Mutex init failed.\n");
-	else if (errno == BAD_PARAMETERS)
+	else if (errno == BAD_PARAMS)
 		printf("Wrong parameteres format.\n");
 	else if (errno == BAD_DETACH)
 		printf("Detach gone wrong.\n");

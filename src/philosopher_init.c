@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/24 11:40:53 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/24 14:33:10 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ int	make_forks(int **params, t_fork **forks)
 		return (BAD_ALLOC);
 	while (i < (*params)[NB_FORKS])
 	{
-		if (!pthread_mutex_init(&((*forks)[i].fork_protect), NULL))
+		if (pthread_mutex_init(&((*forks)[i].fork_protect), NULL))
+		{
+			destroy_mutexes(forks, i);
+			del_mem((void **)forks);
 			return (FAIL_MUTEX_INIT);
-		(*forks)[i].id = i;
+		}
 		(*forks)[i].used = 0;
 		(*forks)[i].last_user_id = -1;
 		++i;
@@ -60,8 +63,16 @@ t_philo_data	*init_philosopher(int *params, t_fork *forks, int index,
 	philosopher->id = index + 1;
 	philosopher->number_eats = 0;
 	philosopher->params = params;
-	philosopher->right_fork = &forks[index];
-	philosopher->left_fork = &forks[(index + 1) % params[NB_FORKS]];
+	if (index == params[NB_PHILOSOPHERS] - 1)
+	{
+		philosopher->right_fork = &forks[(index + 1) % params[NB_FORKS]];
+		philosopher->left_fork = &forks[index];
+	}
+	else
+	{
+		philosopher->right_fork = &forks[index];
+		philosopher->left_fork = &forks[(index + 1) % params[NB_FORKS]];
+	}
 	philosopher->start_program = get_milliseconds(start_of_program.tv_sec,
 			start_of_program.tv_usec);
 	return (philosopher);
