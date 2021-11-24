@@ -6,7 +6,7 @@
 #    By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 12:47:22 by ohachim           #+#    #+#              #
-#    Updated: 2021/11/19 16:33:44 by ohachim          ###   ########.fr        #
+#    Updated: 2021/11/24 11:38:33 by ohachim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,6 @@ SRC_PATH = src
 SRC_NAME = error.c main.c my_atoi.c my_strlen.c philo_actions.c \
 	philosopher_init.c threads.c ft_putchar.c ft_putnbr.c death.c \
 	ft_putstr.c time.c del_mem.c eat.c
-
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 OBJ_PATH = obj
 
@@ -32,7 +30,7 @@ HEADER_NAME = hphilosophers.h
 
 HEADER = $(addprefix $(INC)/, $(HEADER_NAME))
 
-CFLAGS = -pthread -Wall -Wextra -Werror
+CFLAGS = -pthread #-Wall -Wextra -Werror
 
 TARGET = philosopher
 

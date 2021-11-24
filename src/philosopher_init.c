@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/19 16:32:51 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/24 11:40:53 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,18 @@ void	init_parameters(char **argv, int *params, int argc)
 		params[i] = -1;
 }
 
-int	make_forks(int *params, t_fork **forks)
+int	make_forks(int **params, t_fork **forks)
 {
 	int	i;
 
 	i = 0;
-	*forks = (t_fork *)malloc(sizeof(t_fork) * params[NB_FORKS]);
+	*forks = (t_fork *)malloc(sizeof(t_fork) * (*params)[NB_FORKS]);
 	if (!(*forks))
 		return (BAD_ALLOC);
-	while (i < params[NB_FORKS])
+	while (i < (*params)[NB_FORKS])
 	{
-		if (pthread_mutex_init(&((*forks)[i].fork_protect), NULL))
-		{
-			free(params);
-			free(*forks);
+		if (!pthread_mutex_init(&((*forks)[i].fork_protect), NULL))
 			return (FAIL_MUTEX_INIT);
-		}
 		(*forks)[i].id = i;
 		(*forks)[i].used = 0;
 		(*forks)[i].last_user_id = -1;

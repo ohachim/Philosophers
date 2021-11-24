@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/19 16:29:19 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/24 11:41:04 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	del_philosophers(t_philo_data ***philosophers, int nb_philosophers)
 	{
 		pthread_mutex_destroy((*philosophers)[0]->print_mutex);
 		del_mem((void **)&(*philosophers)[0]->print_mutex);
-		while (i < nb_philosophers)
+		while ((*philosophers)[i] && i < nb_philosophers)
 		{
 			pthread_mutex_destroy(&(*philosophers)[i]->death_mutex);
 			del_mem((void **)&(*philosophers)[i]);
@@ -36,10 +36,11 @@ void	clear_data(int **params, t_fork **forks, t_philo_data ***philosophers)
 {
 	if (*philosophers)
 		del_philosophers(philosophers, (*params)[NB_PHILOSOPHERS]);
-	if (*params)
-		del_mem((void **)params);
+	printf("%p: this is the address\n", *forks);
 	if (*forks)
 		del_mem((void **)forks);
+	if (*params)
+		del_mem((void **)params);
 }
 
 int	clear_and_exit(int **params, t_fork **forks, t_philo_data ***philosophers,
@@ -68,11 +69,11 @@ int	main(int argc, char **argv)
 	gettimeofday(&start_of_program, NULL);
 	if (argc != 5 && argc != 6)
 		return (error(BAD_PARAMETERS));
-	params = malloc(sizeof(*params) * argc - 1);
+	params = malloc(sizeof(*params) * (argc - 1));
 	if (!params)
 		return (error(BAD_ALLOC));
 	init_parameters(argv, params, argc);
-	errno = make_forks(params, &forks);
+	errno = make_forks(&params, &forks);
 	if (errno)
 		return (clear_and_exit(&params, &forks, &philosophers, errno));
 	philosophers = make_philosophers(params, forks, start_of_program);
