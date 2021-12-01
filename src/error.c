@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:22:44 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/24 14:29:28 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/01 22:05:12 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	error(int errno)
 {
-	printf("Error: ");
+	if (errno != TOTAL)
+		printf("Error: ");
 	if (errno == BAD_ALLOC)
 		printf("Bad allocation.\n");
 	else if (errno == FAIL_MUTEX_INIT)

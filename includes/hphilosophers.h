@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/29 00:44:55 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/01 22:03:13 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ enum {
 	BAD_DETACH,
 	BAD_PHILOSOPHERS,
 	ZERO_PHILOSOPHERS,
+	WATCHER_CREATE_FAIL,
 	TOTAL
 };
 

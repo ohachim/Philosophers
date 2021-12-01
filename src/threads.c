@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/29 00:42:23 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/01 23:20:47 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	*routine(void *args)
 	philo->last_eat_time = get_milliseconds(last_eat_time.tv_sec,
 			last_eat_time.tv_usec);
 	if (pthread_create(&watcher, NULL, death_watch, philo))
-		*(philo->terminate) = 1;
+		*(philo->terminate) = WATCHER_CREATE_FAIL;
 	while (!*(philo->terminate))
 	{
 		philo_eat(philo);
@@ -33,10 +33,26 @@ static void	*routine(void *args)
 	return (NULL);
 }
 
-static int	free_threads(pthread_t **threads, int errno)
+static int	free_threads(pthread_t **threads, int num_threads,
+				int *terminate, int errno)
 {
+	int	i;
+	int	ret;
+
+	i = 0;
+	if (errno != TOTAL)
+		*terminate = 1;
+	ret = errno;
+	while (i < num_threads)
+	{
+		if (pthread_join((*threads)[i], NULL))
+			ret = BAD_JOIN;
+		i++;
+	}
 	del_mem((void **)threads);
-	return (errno);
+	if (*terminate == WATCHER_CREATE_FAIL)
+		return (BAD_CREATE);
+	return (ret);
 }
 
 void	setup_philo_threads(t_philo_data **philosophers,
@@ -80,17 +96,9 @@ int	start(t_philo_data **philosophers, int *params)
 	{
 		if (pthread_create(&philo_threads[i], NULL,
 				routine, (void*)philosophers[i]))
-			return (free_threads(&philo_threads, BAD_CREATE));
+			return (free_threads(&philo_threads, i,
+					philosophers[0]->terminate, BAD_CREATE));
 		++i;
 	}
-	while (!*(philosophers[0]->terminate))
-		usleep(WAIT_TIME);
-	i = -1;
-	while (++i < params[NB_PHILOSOPHERS])
-	{
-		if (pthread_join(philo_threads[i], NULL))
-			return (free_threads(&philo_threads, BAD_JOIN));
-	}
-	del_mem((void **)&philo_threads);
-	return (TOTAL);
+	return (free_threads(&philo_threads, i, philosophers[0]->terminate, TOTAL));
 }
