@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 16:56:56 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/19 16:15:32 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/29 00:44:59 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	calculate_death(t_philo_data *philo)
 		- philo->last_eat_time;
 	if (i > philo->params[TIME_TO_DIE])
 	{
-		mutex_print("dead", philo, TRUE);
+		mutex_print("dead", philo);
+		*(philo->terminate) = 1;
+		pthread_mutex_unlock(&philo->death_mutex);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->death_mutex);
@@ -37,9 +39,9 @@ void	*death_watch(void *args)
 	philo = (t_philo_data *)args;
 	while (!*(philo->terminate))
 	{
-		if (calculate_death(philo)
-			|| *(philo->philo_eat_goal) == philo->params[NB_PHILOSOPHERS])
+		if (*(philo->philo_eat_goal) == philo->params[NB_PHILOSOPHERS])
 			*(philo->terminate) = 1;
+		calculate_death(philo);
 		usleep(WAIT_TIME);
 	}
 	return (NULL);

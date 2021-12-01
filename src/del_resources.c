@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:18:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/24 14:26:45 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/29 00:46:27 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	destroy_mutexes(t_fork **forks, int index)
 	}
 }
 
-void    del_forks(t_fork **forks, int nb_forks)
+void	del_forks(t_fork **forks, int nb_forks)
 {
-    destroy_mutexes(forks, nb_forks);
-    del_mem((void **)forks);
+	destroy_mutexes(forks, nb_forks);
+	del_mem((void **)forks);
 }
 
 void	del_philosophers(t_philo_data ***philosophers, int nb_philosophers)
@@ -35,12 +35,16 @@ void	del_philosophers(t_philo_data ***philosophers, int nb_philosophers)
 	int	i;
 
 	i = 0;
-	if (nb_philosophers)
+	if (nb_philosophers && *philosophers)
 	{
-		pthread_mutex_destroy((*philosophers)[0]->print_mutex);
-		del_mem((void **)&((*philosophers)[0]->terminate));
-		del_mem((void **)&((*philosophers)[0]->philo_eat_goal));
-		del_mem((void **)&(*philosophers)[0]->print_mutex);
+		if ((*philosophers)[0] && (*philosophers)[0]->print_mutex)
+			pthread_mutex_destroy((*philosophers)[0]->print_mutex);
+		if (philosophers[0])
+		{
+			del_mem((void **)&((*philosophers)[0]->terminate));
+			del_mem((void **)&((*philosophers)[0]->philo_eat_goal));
+			del_mem((void **)&(*philosophers)[0]->print_mutex);
+		}
 		while ((*philosophers)[i] && i < nb_philosophers)
 		{
 			pthread_mutex_destroy(&(*philosophers)[i]->death_mutex);

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:18:53 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/24 14:28:30 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/29 00:42:23 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,16 @@ int	start(t_philo_data **philosophers, int *params)
 		if (pthread_create(&philo_threads[i], NULL,
 				routine, (void*)philosophers[i]))
 			return (free_threads(&philo_threads, BAD_CREATE));
-		if (pthread_detach(philo_threads[i]))
-			return (free_threads(&philo_threads, BAD_DETACH));
 		++i;
 	}
 	while (!*(philosophers[0]->terminate))
 		usleep(WAIT_TIME);
+	i = -1;
+	while (++i < params[NB_PHILOSOPHERS])
+	{
+		if (pthread_join(philo_threads[i], NULL))
+			return (free_threads(&philo_threads, BAD_JOIN));
+	}
 	del_mem((void **)&philo_threads);
 	return (TOTAL);
 }

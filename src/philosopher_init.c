@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/24 14:33:10 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/28 23:59:02 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	init_parameters(char **argv, int *params, int argc)
 		params[i] = -1;
 }
 
-int	make_forks(int **params, t_fork **forks)
+int	make_forks(int *params, t_fork **forks)
 {
 	int	i;
 
 	i = 0;
-	*forks = (t_fork *)malloc(sizeof(t_fork) * (*params)[NB_FORKS]);
+	*forks = (t_fork *)malloc(sizeof(t_fork) * params[NB_FORKS]);
 	if (!(*forks))
 		return (BAD_ALLOC);
-	while (i < (*params)[NB_FORKS])
+	while (i < params[NB_FORKS])
 	{
 		if (pthread_mutex_init(&((*forks)[i].fork_protect), NULL))
 		{
@@ -63,6 +63,8 @@ t_philo_data	*init_philosopher(int *params, t_fork *forks, int index,
 	philosopher->id = index + 1;
 	philosopher->number_eats = 0;
 	philosopher->params = params;
+	philosopher->terminate = NULL;
+	philosopher->philo_eat_goal = NULL;
 	if (index == params[NB_PHILOSOPHERS] - 1)
 	{
 		philosopher->right_fork = &forks[(index + 1) % params[NB_FORKS]];
@@ -87,7 +89,7 @@ t_philo_data	**make_philosophers(int *params, t_fork *forks,
 
 	i = 0;
 	philosophers = malloc(sizeof(*philosophers) * params[NB_PHILOSOPHERS]);
-	print_mutex = malloc(sizeof(*print_mutex) * 1);
+	print_mutex = malloc(sizeof(*print_mutex));
 	if (!philosophers || !print_mutex || pthread_mutex_init(print_mutex, NULL))
 		return (NULL);
 	while (i < params[NB_PHILOSOPHERS])

@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/24 14:29:28 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/11/28 23:37:09 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	init_parameters(argv, params, argc);
 	if (!params[NB_PHILOSOPHERS] || !params[NB_EATS])
 		return (clear_and_exit(&params, &forks, &philosophers, BAD_PARAMS));
-	errno = make_forks(&params, &forks);
+	errno = make_forks(params, &forks);
 	if (errno)
 		return (clear_and_exit(&params, &forks, &philosophers, errno));
 	philosophers = make_philosophers(params, forks, start_of_program);
