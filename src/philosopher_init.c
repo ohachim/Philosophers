@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/28 23:59:02 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/02 19:34:44 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ t_philo_data	**make_philosophers(int *params, t_fork *forks,
 	int					i;
 
 	i = 0;
+	if (!forks)
+		return (NULL);
 	philosophers = malloc(sizeof(*philosophers) * params[NB_PHILOSOPHERS]);
 	print_mutex = malloc(sizeof(*print_mutex));
 	if (!philosophers || !print_mutex || pthread_mutex_init(print_mutex, NULL))

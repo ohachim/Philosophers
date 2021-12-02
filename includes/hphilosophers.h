@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/12/01 22:03:13 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/02 20:06:19 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ enum {
 
 enum {
 	NB_PHILOSOPHERS,
-	NB_FORKS = 0,
+	NB_FORKS = NB_PHILOSOPHERS,
 	TIME_TO_DIE,
 	TIME_TO_EAT,
 	TIME_TO_SLEEP,

@@ -6,7 +6,7 @@
 #    By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 12:47:22 by ohachim           #+#    #+#              #
-#    Updated: 2021/11/24 14:20:28 by ohachim          ###   ########.fr        #
+#    Updated: 2021/12/02 19:53:16 by ohachim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,17 +30,16 @@ HEADER_NAME = hphilosophers.h
 
 HEADER = $(addprefix $(INC)/, $(HEADER_NAME))
 
-CFLAGS = -pthread #-Wall -Wextra -Werror
+CFLAGS = -pthread -Wall -Wextra -Werror
 
 TARGET = philosopher
 
-.PHONY: all, clean, fclean, re
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC)  $^ -o $@
-
+	$(CC)  $^ -o $(TARGET)
+	
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CFLAGS) -I $(INC) -o $@ -c $<

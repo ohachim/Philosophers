@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 03:59:07 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/29 00:45:07 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/02 22:15:31 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	try_take_forks(t_philo_data *philo)
 {
 	int	boolean;
 
-	if (!*(philo->terminate))
+	boolean = 0;
+	if (!*(philo->terminate) && philo->right_fork != philo->left_fork)
 	{
 		pthread_mutex_lock(&philo->right_fork->fork_protect);
 		pthread_mutex_lock(&philo->left_fork->fork_protect);
