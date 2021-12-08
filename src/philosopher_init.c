@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:21:10 by ohachim           #+#    #+#             */
-/*   Updated: 2021/12/02 19:34:44 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/08 16:48:08 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	make_forks(int *params, t_fork **forks)
 	return (0);
 }
 
-t_philo_data	*init_philosopher(int *params, t_fork *forks, int index,
+static t_philo_data	*init_philosopher(int *params, t_fork *forks, int index,
 					struct timeval start_of_program)
 {
 	t_philo_data	*philosopher;

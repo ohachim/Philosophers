@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:39 by ohachim           #+#    #+#             */
-/*   Updated: 2021/12/02 20:06:19 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/08 16:45:10 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int					make_forks(int *params, t_fork **forks);
 void				init_parameters(char **argv, int *params, int argc);
 int					error(int errno);
 void				mutex_print(char *action, t_philo_data *philo);
-int					calculate_death(t_philo_data *philo);
 void				print_time_stamp(unsigned int start_of_program);
 unsigned int		get_milliseconds(unsigned int seconds,
 						unsigned int microseconds);
@@ -88,15 +87,13 @@ void				ft_putnbr(long long num);
 void				ft_putchar(char c);
 void				ft_putstr(char *str);
 void				*death_watch(void *args);
-int					calculate_death(t_philo_data *philo);
 void				del_mem(void **mem_adress);
 void				take_forks(t_philo_data *philo);
 void				drop_forks(t_philo_data *philo);
-int					forks_taken(t_philo_data *philo);
-int					is_last_user(t_philo_data *philo, t_fork *fork);
 int					try_take_forks(t_philo_data *philo);
 void				destroy_mutexes(t_fork **forks, int index);
 void				del_philosophers(t_philo_data ***philosophers,
 						int nb_philosophers);
+void				del_forks(t_fork **forks, int nb_forks);
 
 #endif

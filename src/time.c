@@ -6,7 +6,7 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:42:31 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/19 16:20:32 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/08 16:37:50 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_time_stamp(unsigned int start_of_program)
 	ft_putchar('\t');
 }
 
-unsigned int	get_current_time(void)
+static unsigned int	get_current_time(void)
 {
 	struct timeval	current_time;
 

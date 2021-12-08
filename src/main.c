@@ -6,23 +6,25 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:07:21 by ohachim           #+#    #+#             */
-/*   Updated: 2021/12/02 22:07:18 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/08 16:52:55 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
-void	clear_data(int **params, t_fork **forks, t_philo_data ***philosophers)
+static void	clear_data(int **params, t_fork **forks,
+				t_philo_data ***philosophers)
 {
 	if (*philosophers)
 		del_philosophers(philosophers, (*params)[NB_PHILOSOPHERS]);
 	if (*forks)
-		del_mem((void **)forks);
+		del_forks(forks, (*params)[NB_FORKS]);
 	if (*params)
 		del_mem((void **)params);
 }
 
-int	clear_and_exit(int **params, t_fork **forks, t_philo_data ***philosophers,
+static int	clear_and_exit(int **params, t_fork **forks,
+				t_philo_data ***philosophers,
 				int errno)
 {
 	clear_data(params, forks, philosophers);

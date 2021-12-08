@@ -6,13 +6,13 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 16:56:56 by ohachim           #+#    #+#             */
-/*   Updated: 2021/11/29 00:44:59 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/08 16:38:33 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
-int	calculate_death(t_philo_data *philo)
+static int	calculate_death(t_philo_data *philo)
 {
 	struct timeval	current_time;
 	long			i;
@@ -23,7 +23,7 @@ int	calculate_death(t_philo_data *philo)
 		- philo->last_eat_time;
 	if (i > philo->params[TIME_TO_DIE])
 	{
-		mutex_print("dead", philo);
+		mutex_print("died", philo);
 		*(philo->terminate) = 1;
 		pthread_mutex_unlock(&philo->death_mutex);
 		return (1);

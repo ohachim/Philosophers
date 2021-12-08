@@ -6,18 +6,18 @@
 /*   By: ohachim <ohachim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 03:59:07 by ohachim           #+#    #+#             */
-/*   Updated: 2021/12/02 22:15:31 by ohachim          ###   ########.fr       */
+/*   Updated: 2021/12/08 16:41:01 by ohachim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hphilosophers.h"
 
-int	forks_taken(t_philo_data *philo)
+static int	forks_taken(t_philo_data *philo)
 {
 	return (philo->left_fork->used || philo->right_fork->used);
 }
 
-int	is_last_user(t_philo_data *philo, t_fork *fork)
+static int	is_last_user(t_philo_data *philo, t_fork *fork)
 {
 	return (philo->id == fork->last_user_id);
 }
