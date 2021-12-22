@@ -16,7 +16,7 @@ total, each time a philosopher wants to eat, it needs to pick up two forks, mean
 (they share some forks), after the philosopher finishes eating, it drops the forks, making the resources (forks) available again, now the other
 philosophers can eat.  
 
-                         ![philosophers around table](https://camo.githubusercontent.com/77499a2b05beb38c534cba3fbb4ff85c6f59d43cfc8c7dd9807fc92b406bba56/68747470733a2f2f616469742e696f2f696d67732f64696e696e675f7068696c6f736f70686572732f61745f7468655f7461626c652e706e67)
+ ![philosophers around table](https://camo.githubusercontent.com/77499a2b05beb38c534cba3fbb4ff85c6f59d43cfc8c7dd9807fc92b406bba56/68747470733a2f2f616469742e696f2f696d67732f64696e696e675f7068696c6f736f70686572732f61745f7468655f7461626c652e706e67)
 
 ## Main problems and Solutions
  
