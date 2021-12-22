@@ -41,7 +41,7 @@ philosophers can eat.
  > 3. philo 5 and philo 3 eat ==> normal
  > 4. in this step, two things can happen since both 2 and 1 are waiting on the same fork: **philo 1 and philo 4** eat ***or*** **philo 2 and philo 4** eat, if  the latter happens, philo 1 will die, cause it has been a while since it ate.
   
-Multiple solutions are available for this, This projects adds a _last-user_ variable to the forks, it stores the id of the last philosopher who used it! and
+Multiple solutions are available for this, this implementation adds a _last-user_ variable to the forks, it stores the id of the last philosopher who used it! and
 prevents it from eating two times in a row.
   
 ## Execution
